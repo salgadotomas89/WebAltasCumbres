@@ -1,0 +1,61 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+          <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+              <h1>Nueva Noticia</h1>
+                <form class="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+                     <div class="form-group">
+                        <label for="inputAddress">Titulo</label>
+                        <input name="titulo" type="text" class="form-control" id="inputAddress" >
+                      </div>
+
+                    <div class="form-group">
+                        <label for="subtitulo">Subtitulo</label>
+                        <input name="subtitulo" type="text" class="form-control" id="subtitulo" >
+                      </div>
+
+                    <div class="form-group">
+                        <label for="lead">Escriba lead o entradilla</label>
+                        <textarea name="lead" class="form-control" id="lead" rows="3"></textarea>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Escriba su noticia</label>
+                        <textarea name="texto" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                      </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Imagenes</label>
+                            <input name="documento" type="file" multiple class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+
+                    <div class="form-group">
+                        <label for="titulo2">Titulo sección destacado</label>
+                        <input name="tituloDestacado" type="text" class="form-control" id="titulo2" >
+                      </div>
+
+                    <div class="form-group">
+                        <label for="destacado">Destacado</label>
+                        <textarea name="destacado" class="form-control" id="destacado" rows="3"></textarea>
+                      </div>
+
+                    <div class="form-group">
+                        <label for="redactor">Redactor</label>
+                        <input name="redactor" type="text" class="form-control" id="redactor" >
+                    </div>
+
+
+
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+        </div>
+    </div>
+
+{% endblock %}

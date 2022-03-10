@@ -1,0 +1,54 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+
+    <div class="container text-center">
+        <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+            <div class="  container-fluid py-5">
+                <h1>Noticias</h1>
+                <div class="row">
+                    {% for noticia in noticias %}
+                    <div class="col-sm-6 mb-2">
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ noticia.titulo}}</h5>
+                              <p id="notice" class="card-text">{{ noticia.texto }}.</p>
+                            <a href="{% url 'blog' noticia.id %}" class="btn btn-outline-secondary">Leer</a>
+                              <a href="/delete/noticia/{{ noticia.id }}" role="button" class=" mt-2 btn btn-danger">Eliminar</a>
+
+                          </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        function ellipsis_box(elemento, max_chars){
+        limite_text = $(elemento).text();
+        if (limite_text.length > max_chars)
+        {
+        limite = limite_text.substr(0, max_chars)+" ...";
+        $(elemento).text(limite);
+        }
+        }
+        $(function()
+        {
+
+        ellipsis_box("#notice", 40);
+        });
+    </script>
+
+
+
+
+{% endblock %}

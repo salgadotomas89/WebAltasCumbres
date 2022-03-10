@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container text-center">
+        <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+            <div class="  container-fluid py-5">
+                <h1 class="mb-4">Medidas Covid 19</h1>
+                <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static bg-warning justify-content-center">
+                      <h3 class="mb-0">Alcohol</h3>
+                      <p class="card-text ">
+                          Contamos con dispensadores de alcohol gel en cada entrada para que la higienización
+                          de las manos sea constante.</p>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <img src="{% static 'images/covid/alcohol.jpeg' %}" class="img-fluid" height="200" width="250">
+                    </div>
+                  </div>
+                </div>
+                    <div class="col-md-6">
+                  <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static bg-warning justify-content-center">
+                      <h3 class="mb-0">Distancia correspondiente</h3>
+                      <p class="card-text ">
+                          Cada lugar esta demarcado, para que los pequeños sepan cual es la distancia
+                          que corresponde y asi evitar contacto con compañeros.</p>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <img src="{% static 'images/covid/silla1.png' %}" class="img-fluid" height="200" width="250">
+                    </div>
+                  </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+
+    <div class="container text-center">
+        <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+            <div class="  container-fluid py-5">
+            <h1>Programa de integración escolar</h1>
+
+            <p>El Programa de Integración Escolar fue implementado en el año 2015 con el propósito de contribuir en el mejoramiento continuo y en la calidad de la educación impartida en nuestro establecimiento, favoreciendo la presencia, la participación y el logro de los aprendizajes de todos y cada uno de las y los estudiantes, especialmente de aquellos que presentan necesidades educativas especiales, sean estas de carácter permanente o transitorio.
+Cuenta con profesionales con una sólida formación teórica y práctica comprometidos y empaticos con nuestros alumnos con capacidades diferentes.</p>
+                 <div class="row" >
+                     <div class="col-sm-4 col-md-3 mx-auto py-3">
+                        <div class="card  border">
+                            <img src="{% static 'images/luz.jpg' %}" height="100%" width="100%" lass="card-img-top" alt="...">
+                            <div class="card-body ">
+                                <h4 class="card-title text-primary">Luz Gajardo</h4>
+                                <p class="card-text">Psicologa.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-3 mx-auto py-3">
+                        <div class="card border">
+                            <img src="{% static 'images/loreto.jpeg' %}" height="100%" width="100%" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h4 class="card-title text-primary">Loreto Yevenes</h4>
+                                <p class="card-text">Educadora diferencial.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-md-3 mx-auto py-3">
+                        <div class="card border">
+                            <img src="{% static 'images/pabloantunez.jpg' %}" height="100%" width="100%" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h4 class="card-title text-primary">Pablo Antunez</h4>
+                                <p class="card-text">Psicopedagogo.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!--
+                     <div class="col-sm-4 col-md-3 mx-auto py-3">
+                        <div class="card border">
+                            <img src="{% static 'images/fono.jpg' %}" height="259" width="200" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h4 class="card-title text-primary">Luz Angela</h4>
+                                <p class="card-text">Fonoaudiologa.</p>
+                            </div>
+                        </div>
+                    </div>-->
+
+                 </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

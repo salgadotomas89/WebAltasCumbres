@@ -1,0 +1,26 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-center">
+          <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+              <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">Proyecto educativo</h1>
+
+                        <div>
+                          <p>La convivencia escolar se trata de la construcción de un modo de relación entre las personas de una comunidad, sustentada en el respeto mutuo y en la solidaridad recíproca,
+                              expresada en la interrelación armoniosa y sin violencia entre los diferentes actores y estamentos de la Comunidad Educativa..</p>
+                          <a href="{% url 'proyecto' %}" class="btn btn-primary">
+                            Descargar
+                          </a>
+                        </div>
+
+
+              </div>
+          </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+          <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+              <h1>Nuevo evento</h1>
+                <form class="" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                     <div class="form-group">
+                        <label for="inputAddress">Titulo</label>
+                        <input name="titulo" type="text" class="form-control" id="inputAddress" >
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Escriba el evento</label>
+                        <textarea name="texto" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                      </div>
+
+                        <div class="form-group">
+                           <label for="date" class="col-sm-1 col-form-label">Fecha del evento</label>
+                            <div class="col-sm-4">
+                                <div class="input-group date" id="datepicker">
+                                    <input name="fecha" type="text" class="form-control">
+                                    <span class="input-group-append">
+                                        <span class="input-group-text bg-white">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function() {
+            $('#datepicker').datepicker();
+        });
+    </script>
+
+{% endblock %}

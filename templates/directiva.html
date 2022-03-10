@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container text-center">
+        <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+            <div class="  container-fluid py-5">
+                <h1>Directiva</h1>
+                 <div class="row" >
+                    <div class="col-sm-4 col-md-3 mx-auto py-3">
+                        <div class="card  border">
+                            <img src="{% static 'images/inspector.jpg' %}" height="100%" width="100%" lass="card-img-top" alt="...">
+                            <div class="card-body ">
+                                <h4 class="card-title text-primary">Mauricio Orellana</h4>
+                                <p class="card-text">Inspector General.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-3 mx-auto py-3">
+                        <div class="card border">
+                            <img src="{% static 'images/directora.jpg' %}" height="100%" width="100%" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h4 class="card-title text-primary">Angela Troncoso</h4>
+                                <p class="card-text">Directora.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-md-3 mx-auto py-3">
+                        <div class="card border">
+                            <img src="{% static 'images/utp.jpg' %}" height="100%" width="100%" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h4 class="card-title text-primary">Isabel Silva</h4>
+                                <p class="card-text">Jefe UTP.</p>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

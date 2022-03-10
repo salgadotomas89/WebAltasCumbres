@@ -1,0 +1,62 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-center">
+          <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+              <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">Reglamentos</h1>
+                <div class="container px-4 py-5" id="hanging-icons">
+                    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                      <div class="col d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                            <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
+                        </div>
+                        <div>
+                          <h2>Reglamento de convivencia</h2>
+                          <p>La convivencia escolar se trata de la construcción de un modo de relación entre las personas de una comunidad, sustentada en el respeto mutuo y en la solidaridad recíproca,
+                              expresada en la interrelación armoniosa y sin violencia entre los diferentes actores y estamentos de la Comunidad Educativa..</p>
+                          <a href="{% url 'convivencia' %}" class="btn btn-primary">
+                            Descargar
+                          </a>
+                        </div>
+                      </div>
+                      <div class="col d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                          <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"/></svg>
+                        </div>
+                        <div>
+                          <h2>Reglamento interno</h2>
+                          <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                          <a href="{% url 'reglamentointerno' %}" class="btn btn-primary">
+                            Descargar
+                          </a>
+                        </div>
+                      </div>
+                      <div class="col d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                          <svg class="bi" width="1em" height="1em"><use xlink:href="#tools"/></svg>
+                        </div>
+                        <div>
+                          <h2>Reglamento de evaluación</h2>
+                          <p>Algunos de los aspectos que se consideran en el Reglamento de Evaluación son:</p>
+                            <ul class="list-group list-group-flush mb-2">
+                              <li class="list-group-item">Diferentes estrategias para evaluar los aprendizajes de alumnos y alumnas.</li>
+                              <li class="list-group-item">Formas de calificar y comunicar los resultados a los alumnos y alumnas, madres, padres y apoderados.</li>
+                              <li class="list-group-item">Procedimientos que aplicará el establecimiento para determinar la situación final de alumnos y alumnas.</li>
+                            </ul>
+                          <a href="{% url 'evaluacion' %}" class="btn btn-primary">
+                            Descargar
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+    </div>
+
+{% endblock %}
