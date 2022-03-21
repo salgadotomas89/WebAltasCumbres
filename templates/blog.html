@@ -11,15 +11,14 @@
 
       <article class="blog-post">
         <h1 class="blog-post-title">{{ noticia.titulo }}</h1>
-          <h5 class="blog-post-subtitle">{{ noticia.subtitulo }}</h5>
+        <h5 class="blog-post-subtitle">{{ noticia.subtitulo }}</h5>
         <p class="blog-post-meta">{{ noticia.date}} </p>
 
         <p>{{ noticia.lead }}</p>
 
-          <p>{{ noticia.texto }}</p>
+        <p>{{ noticia.texto }}</p>
 
-          <img src="{{ noticia.documento.url }}"  height="100%" width="100%" alt="...">
-
+        <img src="{{  foto.image.url }}" class="rounded mt-2" height="100%" width="100%" alt="{{  f.image.url }}">
       </article>
 
         <!--

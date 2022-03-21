@@ -1,7 +1,9 @@
+from dataclasses import fields
+from pyexpat import model
 from django import forms
 from django.forms import ClearableFileInput
 
-from colegio.models import Noticia, Evento, Profesor
+from colegio.models import ImagesNoticia, Noticia, Evento, Profesor
 
 
 class ContactForm(forms.Form):
@@ -14,10 +16,13 @@ class ContactForm(forms.Form):
 class FormNoticia(forms.ModelForm):
     class Meta:
         model = Noticia
-        fields = ["titulo", "subtitulo","lead","texto", "documento","redactor", "tituloDestacado","destacado"]
-        widgets = {
-         'documento': ClearableFileInput(attrs={'multiple': True}),
-        }
+        fields = ["titulo", "subtitulo","lead","texto","redactor", "tituloDestacado","destacado"]
+
+class ImagesFormNoticia(FormNoticia): #extending form
+    images = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+
+    class Meta(FormNoticia.Meta):
+        fields = FormNoticia.Meta.fields + ['images',]
 
 
 class FormProfesor(forms.ModelForm):
@@ -31,3 +36,4 @@ class FormEvento(forms.ModelForm):
         model = Evento
         fields = ["fecha", "titulo", "texto"]
 
+        

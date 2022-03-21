@@ -7,11 +7,15 @@ class Noticia(models.Model):
     subtitulo = models.CharField(max_length=200, default=" ")
     lead = models.CharField(max_length=1000, default=" ")
     texto = models.CharField(max_length=1000, default='SOME ')
-    documento = models.FileField(upload_to='noticias')
     date = models.DateTimeField(default=timezone.now)
     redactor = models.CharField(max_length=200, default='Tomás Salgado')
     tituloDestacado = models.CharField(max_length=100, default=" ")
     destacado = models.CharField(max_length=1000, default="")
+
+
+class ImagesNoticia(models.Model):
+    noticia = models.ForeignKey(Noticia,on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='noticias',null=True,blank=True)
 
 
 class Evento(models.Model):
@@ -28,3 +32,7 @@ class Profesor(models.Model):
     universidad = models.CharField(max_length=100, default='-')
     correo = models.CharField(max_length=200, default='sin correo')
     foto = models.ImageField(upload_to='profesores')
+
+
+
+    

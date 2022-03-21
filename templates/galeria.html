@@ -9,9 +9,14 @@
         <div class="p-5 mb-4 mt-4 bg-light rounded-3">
             <div class="container-fluid py-5 text-center">
                 <h1 class="display-5 fw-bold">Galeria de fotos</h1>
-                <h3 class="text-success">Caravana</h3>
-                <img src="{% static 'images/geg.png' %}" class="rounded mt-2" height="300" width="550" alt="...">
-
+                {% for n in noticias  %}
+                    <h3 class="text-success">{{n.titulo}}</h3>
+                    {% for f in fotos%}
+                        {% if f.noticia == n%}
+                            <img src="{{  f.image.url }}" class="rounded mt-2" height="100%" width="100%" alt="...">
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@ from .forms import ContactForm, FormNoticia, FormEvento, FormProfesor
 from datetime import datetime
 
 # Create your views here.
-from .models import Noticia, Evento, Profesor
+from .models import ImagesNoticia, Noticia, Evento, Profesor
 
 
 def show_pdf(request):
@@ -95,16 +95,6 @@ def profesor(request):
     return render(request, 'profesor.html')
 
 
-def blog(request, idnotice):
-    noticia = Noticia.objects.get(id=idnotice)
-
-    noticia.date = dame_formato(noticia.date)
-
-    context = {"noticia": noticia}
-
-    return render(request, 'blog.html', context)
-
-
 def direccion(request):
     return render(request, 'direccion.html')
 
@@ -140,17 +130,37 @@ def pie(request):
     return render(request, 'pie.html')
 
 
+def blog(request, idnotice):
+
+    noticia = Noticia.objects.get(id=idnotice)
+    noticia.date = dame_formato(noticia.date)
+
+    fotos = ImagesNoticia.objects.all().filter(noticia_id=idnotice)
+    foto = ImagesNoticia
+    for f in fotos:
+        if f.noticia.titulo == noticia.titulo:
+            foto = f
+            break
+
+
+    return render(request, 'blog.html', {'noticia':noticia, 'foto':foto})    
+
+
 def noticia(request):
     if request.method == 'POST':
 
-        form = FormNoticia(request.POST, request.FILES)
-        files = request.FILES.getlist('documento')
+        form_noticia = FormNoticia(request.POST, request.FILES)
+        fotos = request.FILES.getlist('imagenes')
 
-        if form.is_valid():
-            form.save()
+        if form_noticia.is_valid():
+            noticia = form_noticia.save(commit=False)
+            noticia.save()
+            for f in fotos:
+                foto = ImagesNoticia(noticia=noticia, image=f)
+                foto.save()
 
         else:
-            print("error")
+            print(form_noticia.errors)
 
     return render(request, 'noticia.html')
 
@@ -179,9 +189,22 @@ def destroy_noticia(request, id):
     news.delete()
     return redirect("/noticias")
 
+def destroy_profesor(request, id):
+    profe = Profesor.objects.get(id=id)
+    profe.delete()
+    return redirect("/profesores")
+
 
 def galeria(request):
-    return render(request, 'galeria.html')
+
+    noticias = Noticia.objects.all()
+
+
+    fotos = ImagesNoticia.objects.all()
+    
+
+
+    return render(request, 'galeria.html', {'noticias':noticias, 'fotos':fotos})    
 
 
 def contacto(request):

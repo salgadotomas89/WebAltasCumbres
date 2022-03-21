@@ -49,7 +49,10 @@ urlpatterns = [
     path('eventos', views.eventos, name='eventos'),
     path('delete/evento/<int:id>', views.destroy),
     path('delete/noticia/<int:id>', views.destroy_noticia),
+    path('delete/profesor/<int:id>', views.destroy_profesor),
+
     path('galeria', views.galeria, name='galeria')
+
 
 ]
 
