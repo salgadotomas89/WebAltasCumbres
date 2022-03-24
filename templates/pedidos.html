@@ -1,0 +1,68 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+        <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1>Lista de pedidos para imprimir</h1>
+                
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">Profesor</th>
+                        <th scope="col">Fecha de ingreso</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Curso</th>
+                        <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for guia in guias %}
+                        <tr>
+                            <td>{{guia.profesor}}</td>
+                            <td>{{guia.fecha_subida}}</td>
+                            <td>{{guia.fecha}}</td>
+                            {% if guia.curso == 'primero'%}
+                                <td>29</td>
+                            {% endif%}
+                            {% if guia.curso == 'segundo'%}
+                                <td>31</td>
+                            {% endif%}
+                            {% if guia.curso == 'tercero'%}
+                                <td>35</td>
+                            {% endif%}
+                            {% if guia.curso == 'cuarto'%}
+                                <td>26</td>
+                            {% endif%}
+                            {% if guia.curso == 'quinto'%}
+                                <td>31</td>
+                            {% endif%}
+                            {% if guia.curso == 'sexto'%}
+                                <td>25</td>
+                            {% endif%}
+                            {% if guia.curso == 'septimo'%}
+                                <td>18</td>
+                            {% endif%}
+                            {% if guia.curso == 'octavo'%}
+                                <td>2900</td>
+                            {% endif%}
+                            <td>{{guia.curso}}</td>
+                            <td><a href="/delete/guia/{{ guia.id }}" role="button" class="btn btn-danger">Eliminar</a>
+                            <a href="/download/guia/{{ guia.id }}" role="button" class="btn btn-success">Descargar</a></td>
+                        </tr>
+                        {% endfor%}
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

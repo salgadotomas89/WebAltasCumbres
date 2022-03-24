@@ -2,8 +2,9 @@ from dataclasses import fields
 from pyexpat import model
 from django import forms
 from django.forms import ClearableFileInput
+from pymysql import NULL
 
-from colegio.models import ImagesNoticia, Noticia, Evento, Profesor
+from colegio.models import Alumno, Guia, Noticia, Evento, Profesor
 
 
 class ContactForm(forms.Form):
@@ -16,7 +17,7 @@ class ContactForm(forms.Form):
 class FormNoticia(forms.ModelForm):
     class Meta:
         model = Noticia
-        fields = ["titulo", "subtitulo","lead","texto","redactor", "tituloDestacado","destacado"]
+        fields = ["titulo", "subtitulo","lead","texto","redactor", "tituloDestacado","destacado", "galeria"]
 
 class ImagesFormNoticia(FormNoticia): #extending form
     images = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
@@ -31,9 +32,22 @@ class FormProfesor(forms.ModelForm):
         fields = ["nombre", "apellido", "profesion", "ciclo", "foto", "correo", "universidad"]
 
 
+class FormAlumno(forms.ModelForm):
+    class Meta:
+        model = Alumno
+        fields = ['nombre', 'apellido', 'curso', 'alergico']
+
+
 class FormEvento(forms.ModelForm):
     class Meta:
         model = Evento
         fields = ["fecha", "titulo", "texto"]
+
+class FormGuia(forms.ModelForm):
+    class Meta:
+        model = Guia
+        fields = ["profesor", "fecha", "documento","curso"]
+    
+
 
         

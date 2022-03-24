@@ -1,0 +1,119 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+        <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1>Guía para imprimir</h1>
+                <form class="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+                     <div class="form-group">
+                        <label for="profesor">Nombre profesor o asistente de la educación</label>
+                        <input name="profesor" type="text" class="form-control" id="profesor" >
+                      </div>
+
+                      <div class="form-group">
+                        <label for="datepicker" >Fecha para el que necesita la guía</label>
+                        <p><small>Recuerde que si necesita las guías para hoy, estas no pueden ser para el primer bloque. Esto
+                        porque se imprime desde 8:15 hasta 10:00</small></p>
+
+                         <div class="col-sm-4">
+                             <div class="input-group date" id="datepicker">
+                                 <input name="fecha" type="text" class="form-control">
+                                 <span class="input-group-append">
+                                     <span class="input-group-text bg-white">
+                                         <i class="fa fa-calendar"></i>
+                                     </span>
+                                 </span>
+                             </div>
+                         </div>
+                     </div>
+
+                    <div class="form-group">
+                        <label for="curso">Curso</label>
+                        <div class="form-check">
+                            <input class="form-check-input" value='primero' type="radio" name="curso" id="curso1">
+                            <label class="form-check-label" for="curso1">
+                                Primero
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" value='segundo' type="radio" name="curso" id="curso2" >
+                            <label class="form-check-label" for="curso2">
+                                Segundo
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" value='tercero' type="radio" name="curso" id="curso3" >
+                            <label class="form-check-label" for="curso3">
+                                Tercero
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" value='cuarto' type="radio" name="curso" id="curso4" >
+                            <label class="form-check-label" for="curso4">
+                                Cuarto
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" value='quinto' type="radio" name="curso" id="curso5" >
+                            <label class="form-check-label" for="curso5">
+                                Quinto
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" value='sexto' type="radio" name="curso" id="curso6" >
+                            <label class="form-check-label" for="curso6">
+                                Sexto
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" value='septimo' type="radio" name="curso" id="curso7" >
+                            <label class="form-check-label" for="curso7">
+                                Séptimo 
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" value='octavo' type="radio" name="curso" id="curso8" >
+                            <label class="form-check-label" for="curso8">
+                                Octavo
+                            </label>
+                        </div>
+                    </div>
+                      
+                      
+
+                      <div class="form-group">
+                        <div class="form-group col-md-2">
+                            <label for="exampleFormControlFile1">Documento</label>
+                            <input name="documento" type="file"  class="form-control-file" id="exampleFormControlFile1">
+                        </div>    
+                      </div>
+
+
+
+
+                  <button type="submit" class="btn btn-primary mt-4">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function() {
+            $('#datepicker').datepicker();
+        });
+    </script>
+
+{% endblock %}

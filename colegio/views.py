@@ -1,14 +1,17 @@
 import mimetypes
 import os
+from django.conf import settings
+
+from urllib.request import Request
 
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, FileResponse
 from django.shortcuts import render, redirect
-from .forms import ContactForm, FormNoticia, FormEvento, FormProfesor
+from .forms import ContactForm, FormAlumno, FormNoticia, FormEvento, FormProfesor, FormGuia
 from datetime import datetime
 
 # Create your views here.
-from .models import ImagesNoticia, Noticia, Evento, Profesor
+from .models import Guia, ImagesNoticia, Noticia, Evento, Profesor
 
 
 def show_pdf(request):
@@ -46,9 +49,9 @@ def index(request):
     context["noticias"] = noticias
     context["eventos"] = Evento.objects.all()
 
-    if len(lista_profesores) >= 5:
+    if len(lista_profesores) >= 4:
         ultimos_profesores = [lista_profesores[len(lista_profesores) -1], lista_profesores[len(lista_profesores) -2],
-                              lista_profesores[len(lista_profesores) -3], lista_profesores[len(lista_profesores) -4]]
+                              lista_profesores[len(lista_profesores) -3]]
         context["profesores"] = ultimos_profesores
 
     if len(noticias) >= 5:
@@ -66,6 +69,17 @@ def dame_formato(date):
 
 def reglamentos(request):
     return render(request, 'reglamentos.html')
+
+
+def pedidos(request):
+    context = {}
+
+    cursos = {'primero' : 29, 'segundo' : 31, 'tercero' : 35, 'cuarto' : 26, 'quinto':31, 'sexto': 25, 'septimo' : 18}
+
+    lista_guias = Guia.objects.all()  # traigo todas las guias
+
+
+    return render(request, 'pedidos.html', {'guias':lista_guias, 'cursos':cursos})
 
 
 def proyecto(request):
@@ -93,6 +107,21 @@ def profesor(request):
             print("error al ingresar profesor")
 
     return render(request, 'profesor.html')
+
+
+def imprimir(request):
+
+    if request.method == 'POST':
+        guia = FormGuia(request.POST, request.FILES)
+        
+
+        if guia.is_valid():
+            guia.save()
+            print("hola")
+        else:
+            print(guia.errors)
+        
+    return render(request, 'imprimir.html')
 
 
 def direccion(request):
@@ -142,7 +171,6 @@ def blog(request, idnotice):
             foto = f
             break
 
-
     return render(request, 'blog.html', {'noticia':noticia, 'foto':foto})    
 
 
@@ -183,11 +211,25 @@ def destroy(request, id):
     employee.delete()
     return redirect("/eventos")
 
+def destroy_guia(request, id):
+    guia = Guia.objects.get(id=id)
+    guia.delete()
+    
+    return redirect("/pedidos")
+
+def download_guia(request, id):
+    guia = Guia.objects.get(id=id)
+
+    
+    filepath = os.path.join(settings.MEDIA_ROOT, guia.documento.name)
+
+    return FileResponse(open(filepath, 'rb'), content_type='application/force-download')
 
 def destroy_noticia(request, id):
     news = Noticia.objects.get(id=id)
     news.delete()
     return redirect("/noticias")
+
 
 def destroy_profesor(request, id):
     profe = Profesor.objects.get(id=id)
@@ -195,16 +237,35 @@ def destroy_profesor(request, id):
     return redirect("/profesores")
 
 
+def add_alumno(request):
+    if request.method == 'POST':
+        form = FormAlumno(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            print('hello')
+        else:
+            print('error al ingresar alumno')    
+
+    return render(request, 'form_alumno.html')
+
+
+def cursos(request):
+    return render(request, 'cursos.html')
+
+
 def galeria(request):
 
     noticias = Noticia.objects.all()
 
+    noticias_galeria = []
+
+    for n in noticias:
+        if n.galeria == True:
+            noticias_galeria.append(n)
 
     fotos = ImagesNoticia.objects.all()
     
-
-
-    return render(request, 'galeria.html', {'noticias':noticias, 'fotos':fotos})    
+    return render(request, 'galeria.html', {'noticias':noticias_galeria, 'fotos':fotos})    
 
 
 def contacto(request):
