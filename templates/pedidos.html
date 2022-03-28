@@ -14,10 +14,11 @@
                 <table class="table">
                     <thead>
                         <tr>
+                        <th scope="col">Estado</th>
                         <th scope="col">Profesor</th>
                         <th scope="col">Fecha de ingreso</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Cantidad</th>
+                        <th scope="col">Fecha de impresion</th>
+                        <th scope="col">Cant.</th>
                         <th scope="col">Curso</th>
                         <th scope="col">Acciones</th>
                         </tr>
@@ -25,6 +26,11 @@
                     <tbody>
                         {% for guia in guias %}
                         <tr>
+                            {% if guia.estado == 'Ok'%}
+                                <td class="text-primary">{{guia.estado}}</td>
+                            {% else%}
+                                <td class="text-danger">{{guia.estado}}</td>
+                            {% endif%}
                             <td>{{guia.profesor}}</td>
                             <td>{{guia.fecha_subida}}</td>
                             <td>{{guia.fecha}}</td>
@@ -54,7 +60,8 @@
                             {% endif%}
                             <td>{{guia.curso}}</td>
                             <td><a href="/delete/guia/{{ guia.id }}" role="button" class="btn btn-danger">Eliminar</a>
-                            <a href="/download/guia/{{ guia.id }}" role="button" class="btn btn-success">Descargar</a></td>
+                            <a href="/download/guia/{{ guia.id }}" role="button" class="btn btn-success">Descargar</a>
+                            <a href="/estado/guia/{{ guia.id }}" role="button" class="btn btn-primary">Lista</a></td>
                         </tr>
                         {% endfor%}
                     </tbody>

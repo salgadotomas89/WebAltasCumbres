@@ -7,6 +7,8 @@ from django.utils import timezone
 import os
 
 
+#noticia que tiene sus componentes correspondientes. galeria significa que esta noticia pasa
+#a estar en la galeria de fotos, cuando la noticia tenga varias fotos.
 class Noticia(models.Model):
     titulo = models.CharField(max_length=200)
     subtitulo = models.CharField(max_length=200, default=" ")
@@ -18,7 +20,7 @@ class Noticia(models.Model):
     destacado = models.CharField(max_length=1000, default="")
     galeria = models.BooleanField(default=False)
 
-
+#modelo que contiene una foto relacionada a una noticia con clave foranea
 class ImagesNoticia(models.Model):
     noticia = models.ForeignKey(Noticia,on_delete=models.CASCADE)
     image = models.ImageField(upload_to='noticias',null=True,blank=True)
@@ -39,13 +41,25 @@ class Profesor(models.Model):
     correo = models.CharField(max_length=200, default='sin correo')
     foto = models.ImageField(upload_to='profesores')
 
+#este modelo llamado asistente, engloba a todos los trabajadores que no son profesores en el establecimiento o que son profesores
+#pero desempeñan otro trabajo
+class Asistente(models.Model):
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    profesion = models.CharField(max_length=100, default='asistente de la educación')
+    ciclo = models.IntegerField(default=4)
+    universidad = models.CharField(max_length=100, default='-')
+    correo = models.CharField(max_length=200, default='sin correo')
+    foto = models.ImageField(upload_to='asistentes')
+
+
 class Alumno(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     curso = models.CharField(max_length=100)
     alergico = models.CharField(max_length=100, default='no es alergico')
 
-
+#guia es el documento que envian los profesores o asistentes a imprimir
 class Guia(models.Model):
     profesor = models.CharField(max_length=100)
     fecha = models.CharField(max_length=100)
@@ -53,6 +67,7 @@ class Guia(models.Model):
     fecha_subida = models.DateTimeField(default=timezone.now)
     documento = models.FileField(upload_to='guias')
     curso = models.CharField(max_length=100, default="sin curso")
+    estado = models.CharField(max_length=100, default="por imprimir" )
 
     def delete(self, *args, **kwargs):
         os.remove(os.path.join(settings.MEDIA_ROOT, self.documento.name))

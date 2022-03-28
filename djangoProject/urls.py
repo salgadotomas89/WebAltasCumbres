@@ -53,6 +53,7 @@ urlpatterns = [
     path('delete/noticia/<int:id>', views.destroy_noticia),
     path('delete/guia/<int:id>', views.destroy_guia),
     path('download/guia/<int:id>', views.download_guia),
+    path('estado/guia/<int:id>', views.estado_guia),
     path('delete/profesor/<int:id>', views.destroy_profesor),
     path('cursos', views.cursos),
     path('galeria', views.galeria, name='galeria'),

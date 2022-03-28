@@ -70,6 +70,10 @@ def dame_formato(date):
 def reglamentos(request):
     return render(request, 'reglamentos.html')
 
+def perfil(request):
+
+    return(request, 'perfil.html')
+
 
 def pedidos(request):
     context = {}
@@ -214,6 +218,13 @@ def destroy(request, id):
 def destroy_guia(request, id):
     guia = Guia.objects.get(id=id)
     guia.delete()
+    
+    return redirect("/pedidos")
+
+def estado_guia(request, id):
+    guia = Guia.objects.get(id=id)
+    guia.estado = "Ok"
+    guia.save()
     
     return redirect("/pedidos")
 

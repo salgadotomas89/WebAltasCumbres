@@ -4,7 +4,7 @@ from django import forms
 from django.forms import ClearableFileInput
 from pymysql import NULL
 
-from colegio.models import Alumno, Guia, Noticia, Evento, Profesor
+from colegio.models import Alumno, Asistente, Guia, Noticia, Evento, Profesor
 
 
 class ContactForm(forms.Form):
@@ -29,6 +29,11 @@ class ImagesFormNoticia(FormNoticia): #extending form
 class FormProfesor(forms.ModelForm):
     class Meta:
         model = Profesor
+        fields = ["nombre", "apellido", "profesion", "ciclo", "foto", "correo", "universidad"]
+
+class FormAsistente(forms.ModelForm):
+    class Meta:
+        model = Asistente
         fields = ["nombre", "apellido", "profesion", "ciclo", "foto", "correo", "universidad"]
 
 
