@@ -1,19 +1,25 @@
 import mimetypes
+from multiprocessing import context
 import os
 from django.conf import settings
-
+from django.contrib.auth.models import User
 from urllib.request import Request
-
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, FileResponse
 from django.shortcuts import render, redirect
 from .forms import ContactForm, FormAlumno, FormNoticia, FormEvento, FormProfesor, FormGuia
 from datetime import datetime
+from django.contrib import messages #import messages
+import json
+
+
+
 
 # Create your views here.
 from .models import Guia, ImagesNoticia, Noticia, Evento, Profesor
 
 
+#funciones relacionadas con los archivos estaticos como reglamento
 def show_pdf(request):
     filepath = os.path.join('static', 'PEI.pdf')
     return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
@@ -33,7 +39,13 @@ def show_eva(request):
     filepath = os.path.join('static', 'EVA.pdf')
     return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
 
+def reglamentos(request):
+    return render(request, 'reglamentos.html')
 
+def proyecto(request):
+    return render(request, 'proyecto.html')
+
+#pagina de inicio del sitio
 def index(request):
     context = {}
     noticias = Noticia.objects.all()  # traigo todas las noticias
@@ -62,32 +74,68 @@ def index(request):
     return render(request, "index.html", context)
 
 
+#cambia el formato de la fecha date
 def dame_formato(date):
     formato = "%d %b %Y"
     return date.strftime(formato)
 
-
-def reglamentos(request):
-    return render(request, 'reglamentos.html')
-
+#funciones relacionadas con el perfil de los usuarios
 def perfil(request):
 
     return(request, 'perfil.html')
 
-
+#Guias para imprimir
 def pedidos(request):
     context = {}
 
-    cursos = {'primero' : 29, 'segundo' : 31, 'tercero' : 35, 'cuarto' : 26, 'quinto':31, 'sexto': 25, 'septimo' : 18}
 
     lista_guias = Guia.objects.all()  # traigo todas las guias
 
+    for l in lista_guias:
+        l.fecha_subida = dame_formato(l.fecha_subida)
 
-    return render(request, 'pedidos.html', {'guias':lista_guias, 'cursos':cursos})
+
+    return render(request, 'pedidos.html', {'guias':lista_guias})
+
+def imprimir(request):
+
+    profesores = Profesor.objects.all()
 
 
-def proyecto(request):
-    return render(request, 'proyecto.html')
+    if request.method == 'POST':
+        guia = FormGuia(request.POST, request.FILES)
+        print("cantidad :"+guia.cantidad)
+        if guia.is_valid():
+            guia.save()
+            messages.success(request, 'Archivo enviado exitosamente.')
+            return render(request, 'imprimir.html')
+        else:
+            messages.error(request, 'Hubo un error, intente nuevamente.')
+            return render(request, 'imprimir.html')
+        
+    return render(request, 'imprimir.html', {"profesores":profesores})
+
+def destroy_guia(request, id):
+    guia = Guia.objects.get(id=id)
+    guia.delete()
+    
+    return redirect("/pedidos")
+
+def estado_guia(request, id):
+    guia = Guia.objects.get(id=id)
+    guia.estado = "Ok"
+    guia.save()
+    
+    return redirect("/pedidos")
+
+def download_guia(request, id):
+    guia = Guia.objects.get(id=id)
+
+    
+    filepath = os.path.join(settings.MEDIA_ROOT, guia.documento.name)
+
+    return FileResponse(open(filepath, 'rb'), content_type='application/force-download')
+
 
 
 def directiva(request):
@@ -105,6 +153,10 @@ def vision(request):
 def profesor(request):
     if request.method == 'POST':
         form = FormProfesor(request.POST, request.FILES)
+
+        user = User.objects.create_user(form.nombre, form.email, form.password)
+        user.save()
+
         if form.is_valid():
             new_article = form.save()
         else:
@@ -113,19 +165,7 @@ def profesor(request):
     return render(request, 'profesor.html')
 
 
-def imprimir(request):
 
-    if request.method == 'POST':
-        guia = FormGuia(request.POST, request.FILES)
-        
-
-        if guia.is_valid():
-            guia.save()
-            print("hola")
-        else:
-            print(guia.errors)
-        
-    return render(request, 'imprimir.html')
 
 
 def direccion(request):
@@ -215,26 +255,7 @@ def destroy(request, id):
     employee.delete()
     return redirect("/eventos")
 
-def destroy_guia(request, id):
-    guia = Guia.objects.get(id=id)
-    guia.delete()
-    
-    return redirect("/pedidos")
 
-def estado_guia(request, id):
-    guia = Guia.objects.get(id=id)
-    guia.estado = "Ok"
-    guia.save()
-    
-    return redirect("/pedidos")
-
-def download_guia(request, id):
-    guia = Guia.objects.get(id=id)
-
-    
-    filepath = os.path.join(settings.MEDIA_ROOT, guia.documento.name)
-
-    return FileResponse(open(filepath, 'rb'), content_type='application/force-download')
 
 def destroy_noticia(request, id):
     news = Noticia.objects.get(id=id)

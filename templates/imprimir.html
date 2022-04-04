@@ -8,21 +8,32 @@
     <div class="container text-left">
         <div class="p-5 mb-4 mt-4 bg-light rounded-3">
             <div class="container-fluid py-5">
-                <h1>Guía para imprimir</h1>
-                <form class="" method="post" enctype="multipart/form-data">
+                <h1>Archivo para imprimir</h1>
+  
+                <form class=" " method="post" enctype="multipart/form-data">
                     {% csrf_token %}
+                    
                     {{ form }}
-                     <div class="form-group">
-                        <label for="profesor">Nombre profesor o asistente de la educación</label>
-                        <input name="profesor" type="text" class="form-control" id="profesor" >
-                      </div>
 
-                      <div class="form-group">
+
+                    
+                    
+
+                     <div class=" form-group mt-2">
+                        <label for="profesor">Nombre profesor o asistente de la educación</label>
+                        <div class="col-md-2">
+                            <input name="profesor" type="text" class="form-control" id="autoComplete" >
+                        </div>
+                     </div>
+
+            
+
+                      <div class="form-group mt-2">
                         <label for="datepicker" >Fecha para el que necesita la guía</label>
                         <p><small>Recuerde que si necesita las guías para hoy, estas no pueden ser para el primer bloque. Esto
                         porque se imprime desde 8:15 hasta 10:00</small></p>
 
-                         <div class="col-sm-4">
+                         <div class="col-sm-2">
                              <div class="input-group date" id="datepicker">
                                  <input name="fecha" type="text" class="form-control">
                                  <span class="input-group-append">
@@ -34,67 +45,53 @@
                          </div>
                      </div>
 
-                    <div class="form-group">
-                        <label for="curso">Curso</label>
-                        <div class="form-check">
-                            <input class="form-check-input" value='primero' type="radio" name="curso" id="curso1">
-                            <label class="form-check-label" for="curso1">
-                                Primero
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" value='segundo' type="radio" name="curso" id="curso2" >
-                            <label class="form-check-label" for="curso2">
-                                Segundo
-                            </label>
+
+                     <div class="form-group mt-2 ">
+
+                        <label for="cantidad">Curso</label>
+
+                        <div class="col-md-8">
+
+
+                        <input  type="radio" class="btn-check " value="primero" name="curso" id="curso1" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="curso1">Primero</label>
+
+                        <input type="radio" class="btn-check" value="segundo" name="curso" id="curso2" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="curso2">Segundo</label>
+
+                        <input type="radio" class="btn-check" value="tercero" name="curso" id="curso3" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="curso3">Tercero</label>
+
+                         <input type="radio" class="btn-check" value="cuarto" name="curso" id="curso4" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="curso4">Cuarto</label>
+
+                        <input type="radio" class="btn-check" value="quinto" name="curso" id="curso5" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="curso5">Quinto</label>
+
+                         <input type="radio" class="btn-check" value="sexto" name="curso" id="curso6" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="curso6">Sexto</label>
+
+                        <input type="radio" class="btn-check" value="septimo" name="curso" id="curso7" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="curso7">Septimo</label>
+
+
+                        <input type="radio" class="btn-check" value="octavo" name="curso" id="curso8" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="curso8">Octavo</label>
                         </div>
 
-                        <div class="form-check">
-                            <input class="form-check-input" value='tercero' type="radio" name="curso" id="curso3" >
-                            <label class="form-check-label" for="curso3">
-                                Tercero
-                            </label>
+                        
                         </div>
 
-                        <div class="form-check">
-                            <input class="form-check-input" value='cuarto' type="radio" name="curso" id="curso4" >
-                            <label class="form-check-label" for="curso4">
-                                Cuarto
-                            </label>
+                     <div class="form-group mt-2">
+                        <label for="cantidad">Cantidad</label>
+                        <div class="col-md-1">
+                            <input name="cantidad" type="text" class="form-control  border-primary" id="cantidad" >
                         </div>
+                     </div>
 
-                        <div class="form-check">
-                            <input class="form-check-input" value='quinto' type="radio" name="curso" id="curso5" >
-                            <label class="form-check-label" for="curso5">
-                                Quinto
-                            </label>
-                        </div>
+                    
 
-                        <div class="form-check">
-                            <input class="form-check-input" value='sexto' type="radio" name="curso" id="curso6" >
-                            <label class="form-check-label" for="curso6">
-                                Sexto
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" value='septimo' type="radio" name="curso" id="curso7" >
-                            <label class="form-check-label" for="curso7">
-                                Séptimo 
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" value='octavo' type="radio" name="curso" id="curso8" >
-                            <label class="form-check-label" for="curso8">
-                                Octavo
-                            </label>
-                        </div>
-                    </div>
-                      
-                      
-
-                      <div class="form-group">
+                         <div class="form-group mt-2">
                         <div class="form-group col-md-2">
                             <label for="exampleFormControlFile1">Documento</label>
                             <input name="documento" type="file"  class="form-control-file" id="exampleFormControlFile1">
@@ -102,18 +99,109 @@
                       </div>
 
 
+                     <button type="submit" class="btn btn-warning mt-4">Enviar</button>
+
+                             
+                    </div>
+                      
 
 
-                  <button type="submit" class="btn btn-primary mt-4">Enviar</button>
+                     
+
+
+                    
+
+
+
+
+
+                  {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
                 </form>
             </div>
         </div>
     </div>
 
-    <script type="text/javascript">
+  
+    
+
+     <script type="text/javascript">
+
         $(function() {
             $('#datepicker').datepicker();
         });
+
+        $('#myList a').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+
+
+        const autoCompleteJS = new autoComplete({
+            placeHolder: " ",
+            data: {
+                src: ["Jasna Gonzalez", "Michelle Quilodrán", "Gonzalo Sanhueza"],
+                cache: true,
+            },
+            resultItem: {
+                highlight: true
+            },
+            events: {
+                input: {
+                    selection: (event) => {
+                        const selection = event.detail.selection.value;
+                        autoCompleteJS.input.value = selection;
+                    }
+                }
+            }
+        });
+
+        $(document).on('change','input[type="radio"]' ,function(e) {
+            if(this.id=="curso1") {
+                if(this.checked) $('#cantidad').val(29);
+                else $('#cantidad').val("");
+            }
+            if(this.id=="curso2") {
+                if(this.checked) $('#cantidad').val(31);
+                else $('#cantidad').val("");
+            }
+
+            if(this.id=="curso3") {
+                if(this.checked) $('#cantidad').val(35);
+                else $('#cantidad').val("");
+            }
+            if(this.id=="curso4") {
+                if(this.checked) $('#cantidad').val(26);
+                else $('#cantidad').val("");
+            }
+
+            if(this.id=="curso5") {
+                if(this.checked) $('#cantidad').val(31);
+                else $('#cantidad').val("");
+            }
+            if(this.id=="curso6") {
+                if(this.checked) $('#cantidad').val(25);
+                else $('#cantidad').val("");
+            }
+            if(this.id=="curso7") {
+                if(this.checked) $('#cantidad').val(18);
+                else $('#cantidad').val("");
+            }
+            if(this.id=="curso8") {
+                if(this.checked) $('#cantidad').val(29);
+                else $('#cantidad').val("");
+            }
+            
+        });
+
+
+        
+
     </script>
 
 {% endblock %}

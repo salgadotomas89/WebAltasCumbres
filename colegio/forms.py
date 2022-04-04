@@ -27,9 +27,12 @@ class ImagesFormNoticia(FormNoticia): #extending form
 
 
 class FormProfesor(forms.ModelForm):
+    #password = forms.CharField(widget=forms.PasswordInput)
+
     class Meta:
         model = Profesor
-        fields = ["nombre", "apellido", "profesion", "ciclo", "foto", "correo", "universidad"]
+        fields = ["nombre", "apellido","profesion", "ciclo", "foto", "correo", "universidad"]
+        
 
 class FormAsistente(forms.ModelForm):
     class Meta:
@@ -51,7 +54,7 @@ class FormEvento(forms.ModelForm):
 class FormGuia(forms.ModelForm):
     class Meta:
         model = Guia
-        fields = ["profesor", "fecha", "documento","curso"]
+        fields = ["profesor", "fecha", "documento",'cantidad', "curso",]
     
 
 

@@ -34,30 +34,7 @@
                             <td>{{guia.profesor}}</td>
                             <td>{{guia.fecha_subida}}</td>
                             <td>{{guia.fecha}}</td>
-                            {% if guia.curso == 'primero'%}
-                                <td>29</td>
-                            {% endif%}
-                            {% if guia.curso == 'segundo'%}
-                                <td>31</td>
-                            {% endif%}
-                            {% if guia.curso == 'tercero'%}
-                                <td>35</td>
-                            {% endif%}
-                            {% if guia.curso == 'cuarto'%}
-                                <td>26</td>
-                            {% endif%}
-                            {% if guia.curso == 'quinto'%}
-                                <td>31</td>
-                            {% endif%}
-                            {% if guia.curso == 'sexto'%}
-                                <td>25</td>
-                            {% endif%}
-                            {% if guia.curso == 'septimo'%}
-                                <td>18</td>
-                            {% endif%}
-                            {% if guia.curso == 'octavo'%}
-                                <td>2900</td>
-                            {% endif%}
+                            <td>{{guia.cantidad}}</td>
                             <td>{{guia.curso}}</td>
                             <td><a href="/delete/guia/{{ guia.id }}" role="button" class="btn btn-danger">Eliminar</a>
                             <a href="/download/guia/{{ guia.id }}" role="button" class="btn btn-success">Descargar</a>

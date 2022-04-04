@@ -11,13 +11,13 @@ import os
 #a estar en la galeria de fotos, cuando la noticia tenga varias fotos.
 class Noticia(models.Model):
     titulo = models.CharField(max_length=200)
-    subtitulo = models.CharField(max_length=200, default=" ")
-    lead = models.CharField(max_length=1000, default=" ")
-    texto = models.CharField(max_length=1000, default='SOME ')
+    subtitulo = models.CharField(max_length=200,blank=True, null=True, default=" ")
+    lead = models.CharField(max_length=1000,blank=True, null=True, default=" ")
+    texto = models.CharField(max_length=1000, default='SOME')
     date = models.DateTimeField(default=timezone.now)
-    redactor = models.CharField(max_length=200, default='Tomás Salgado')
-    tituloDestacado = models.CharField(max_length=100, default=" ")
-    destacado = models.CharField(max_length=1000, default="")
+    redactor = models.CharField(max_length=200,blank=True, null=True, default='Tomás Salgado')
+    tituloDestacado = models.CharField(max_length=100, blank=True, null=True, default=" ")
+    destacado = models.CharField(max_length=1000, blank=True, null=True , default=" ")
     galeria = models.BooleanField(default=False)
 
 #modelo que contiene una foto relacionada a una noticia con clave foranea
@@ -40,6 +40,10 @@ class Profesor(models.Model):
     universidad = models.CharField(max_length=100, default='-')
     correo = models.CharField(max_length=200, default='sin correo')
     foto = models.ImageField(upload_to='profesores')
+    #password = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.nombre}"
 
 #este modelo llamado asistente, engloba a todos los trabajadores que no son profesores en el establecimiento o que son profesores
 #pero desempeñan otro trabajo
@@ -63,7 +67,7 @@ class Alumno(models.Model):
 class Guia(models.Model):
     profesor = models.CharField(max_length=100)
     fecha = models.CharField(max_length=100)
-    cantidad = models.CharField(max_length=100, default= '10')
+    cantidad = models.CharField(max_length=100,blank=True, null=True, default= '10')
     fecha_subida = models.DateTimeField(default=timezone.now)
     documento = models.FileField(upload_to='guias')
     curso = models.CharField(max_length=100, default="sin curso")
