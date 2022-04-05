@@ -9,14 +9,18 @@ from django.http import HttpResponse, FileResponse
 from django.shortcuts import render, redirect
 from .forms import ContactForm, FormAlumno, FormNoticia, FormEvento, FormProfesor, FormGuia
 from datetime import datetime
+from django.core import serializers
 from django.contrib import messages #import messages
 import json
+from django.http import JsonResponse
+
+
 
 
 
 
 # Create your views here.
-from .models import Guia, ImagesNoticia, Noticia, Evento, Profesor
+from .models import Alumno, Guia, ImagesNoticia, Noticia, Evento, Profesor
 
 
 #funciones relacionadas con los archivos estaticos como reglamento
@@ -104,7 +108,6 @@ def imprimir(request):
 
     if request.method == 'POST':
         guia = FormGuia(request.POST, request.FILES)
-        print("cantidad :"+guia.cantidad)
         if guia.is_valid():
             guia.save()
             messages.success(request, 'Archivo enviado exitosamente.')
@@ -154,11 +157,8 @@ def profesor(request):
     if request.method == 'POST':
         form = FormProfesor(request.POST, request.FILES)
 
-        user = User.objects.create_user(form.nombre, form.email, form.password)
-        user.save()
-
         if form.is_valid():
-            new_article = form.save()
+            form.save()
         else:
             print("error al ingresar profesor")
 
@@ -187,6 +187,11 @@ def colegio(request):
 def profesores(request):
     context = {"profesores": Profesor.objects.all()}
     return render(request, 'profesores.html', context)
+
+def alumnos(request):
+    context = {"alumnos": Alumno.objects.all()}
+    return render(request, 'alumnos.html', context)
+
 
 
 def noticias(request):
@@ -268,17 +273,30 @@ def destroy_profesor(request, id):
     profe.delete()
     return redirect("/profesores")
 
+def destroy_alumno(request, id):
+    alumno = Alumno.objects.get(id=id)
+    alumno.delete()
+    return redirect("/alumnos")
+
 
 def add_alumno(request):
-    if request.method == 'POST':
-        form = FormAlumno(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            print('hello')
-        else:
-            print('error al ingresar alumno')    
+    return render(request, 'alumno.html')
 
-    return render(request, 'form_alumno.html')
+def savealumno(request):
+    # request should be ajax and method should be POST.
+    if request.is_ajax and request.method == "POST":
+        # get the form data
+        form = FormAlumno(request.POST)
+        if form.is_valid:
+            # save the data and after fetch the object in instance
+            form.save()
+
+            response = {
+                            'msg':'Datos guardados exitosamente' # response message
+                }
+            return JsonResponse(response)
+        
+    return render(request, 'alumno.html')
 
 
 def cursos(request):

@@ -18,7 +18,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include, re_path
-
 from colegio import views
 from djangoProject import settings
 
@@ -36,6 +35,7 @@ urlpatterns = [
     path('admision', views.admision, name="admision"),
     path('colegio', views.colegio, name="colegio"),
     path('profesores', views.profesores, name="profesores"),
+    path('alumnos', views.alumnos),
     path('profesor', views.profesor, name='profesor'),
     path('direccion', views.direccion, name='direccion'),
     path('valores', views.valores, name='valores'),
@@ -49,12 +49,14 @@ urlpatterns = [
     path('evaluacion', views.show_eva, name='evaluacion'),
     path('eventos', views.eventos, name='eventos'),
     path('add/alumno', views.add_alumno),
+    path('savealumno', views.savealumno, name='savealumno'),
     path('delete/evento/<int:id>', views.destroy),
     path('delete/noticia/<int:id>', views.destroy_noticia),
     path('delete/guia/<int:id>', views.destroy_guia),
     path('download/guia/<int:id>', views.download_guia),
     path('estado/guia/<int:id>', views.estado_guia),
     path('delete/profesor/<int:id>', views.destroy_profesor),
+    path('delete/alumno/<int:id>', views.destroy_alumno),
     path('cursos', views.cursos),
     path('galeria', views.galeria, name='galeria'),
     path('guias', views.imprimir, name="guias"),

@@ -40,7 +40,7 @@ class Profesor(models.Model):
     universidad = models.CharField(max_length=100, default='-')
     correo = models.CharField(max_length=200, default='sin correo')
     foto = models.ImageField(upload_to='profesores')
-    #password = models.CharField(max_length=100)
+    password = models.CharField(max_length=100, default='altascumbres')
 
     def __str__(self):
         return f"{self.nombre}"
@@ -60,8 +60,16 @@ class Asistente(models.Model):
 class Alumno(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
-    curso = models.CharField(max_length=100)
-    alergico = models.CharField(max_length=100, default='no es alergico')
+    direccion = models.CharField(max_length=100, null=False, default='sin dirección')
+    fono = models.CharField(max_length=20,blank=False, null=False, default='0')
+    curso = models.CharField(max_length=100,blank=False, null=False, default='0')
+    alergico = models.CharField(max_length=100,blank=True, null=True, default='no es alergico')
+
+    def __str__(self):
+        return self.nombre
+    
+    
+
 
 #guia es el documento que envian los profesores o asistentes a imprimir
 class Guia(models.Model):

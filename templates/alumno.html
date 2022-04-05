@@ -1,0 +1,93 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+          <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+              <h1>Ingresar Alumno</h1>
+                <form id="formAlumno" class="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+                     <div class="form-group">
+                        <label for="nombreProfesor">Nombre</label>
+                        <input name="nombre" type="text" class="form-control" id="nombreProfesor" >
+                     </div>
+
+                    <div class="form-group">
+                        <label for="apellidoProfesor">Apellido</label>
+                        <input name="apellido" type="text" class="form-control" id="apellidoProfesor" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input name="direccion" type="text" class="form-control" id="direccion" >
+                    </div>
+
+
+                    <div class="form-group mb-4 mt-4">
+                        <select class="form-select" name="curso" aria-label="Default select example">
+                          <option selected>Curso</option>
+                          <option value="primero">primero</option>
+                          <option value="segundo">segundo</option>
+                          <option value="tercero">tercero</option>
+                          <option value="cuarto">cuarto</option>
+                          <option value="quinto">quinto</option>
+                          <option value="sexto">sexto</option>
+                          <option value="séptimo">septimo</option>
+                          <option value="octavo">octavo</option>
+                        </select>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label for="alergico">Alergico?</label>
+                        <input name="alergico" type="text" class="form-control" id="alergico" >
+                     </div>
+
+
+                    
+
+                    <div class="form-group">
+                        <label for="fono">Fono</label>
+                        <input name="fono" type="text" class="form-control" id="fono" >
+                     </div>
+
+
+                    <div class="form-group mb-4 mt-4">
+                        <input name="foto" type="file" class="form-control-file" >
+                    </div>
+
+
+                  <button type="submit" class="btn btn-primary mb-4 mt-4">Guardar</button>
+                </form>
+                <div id="output">
+                </div>
+        </div>
+    </div>
+
+
+     <script type="text/javascript">
+        $('#formAlumno').on('submit', function(e){
+             
+        e.preventDefault();
+
+            $.ajax({
+                type : "POST", 
+                url: "{% url 'savealumno' %}",
+                data: $('#formAlumno').serialize(),
+                
+                success: function(data){
+                   $('#output').html(data.msg) /* response message */
+                },
+         
+                failure: function() {
+                    
+                }
+            });
+        });    
+      </script>
+
+{% endblock %}

@@ -31,7 +31,7 @@ class FormProfesor(forms.ModelForm):
 
     class Meta:
         model = Profesor
-        fields = ["nombre", "apellido","profesion", "ciclo", "foto", "correo", "universidad"]
+        fields = ["nombre", "apellido","profesion", "ciclo", "foto", "correo", "universidad", 'password']
         
 
 class FormAsistente(forms.ModelForm):
@@ -43,7 +43,7 @@ class FormAsistente(forms.ModelForm):
 class FormAlumno(forms.ModelForm):
     class Meta:
         model = Alumno
-        fields = ['nombre', 'apellido', 'curso', 'alergico']
+        fields = ['nombre', 'apellido', 'curso', 'alergico', 'fono', 'direccion']
 
 
 class FormEvento(forms.ModelForm):
