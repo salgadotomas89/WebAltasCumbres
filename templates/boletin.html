@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+        <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1>Boletin</h1>
+                <h2>Nuestro equipo</h2>
+
+                <div class="card-group">
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="{% static 'images/maite.jpeg' %}" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">Maite Díaz</h5>
+                    <p class="card-text">.</p>
+                    </div>
+                    <div class="card-footer">
+                    <small class="text-muted">Reportera </small>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">Steisy Barra</h5>
+                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                    <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+                
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

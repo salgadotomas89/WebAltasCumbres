@@ -1,0 +1,44 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+        <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1>Lista de libros disponibles en nuestra biblioteca</h1>
+                
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Editorial</th>
+                        <th scope="col">Clasificación</th>
+                        <th scope="col">Cant.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for libro in libros %}
+
+                        <tr>
+                            <td class="text-primary">{{libro.nombre}}</td>
+                            <td>{{libro.autor}}</td>
+                            <td>{{libro.editorial}}</td>
+                            <td>{{libro.tema}}</td>
+                            <td>{{libro.cantidad}}</td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -2,12 +2,13 @@
 
 {% load static %}
 
-
 {% block content %}
+
+
 
     <div class="container text-left">
           <div class="p-5 mb-4 mt-4 bg-light rounded-3">
-              <h1>Nueva Noticia</h1>
+              <h1 >Nueva Noticia</h1>
                 <form class="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form }}
@@ -21,10 +22,7 @@
                         <input name="subtitulo" type="text" class="form-control" id="subtitulo" >
                       </div>
 
-                    <div class="form-group">
-                        <label for="lead">Escriba lead o entradilla</label>
-                        <textarea name="lead" class="form-control" id="lead" rows="3"></textarea>
-                      </div>
+                  
 
                       <div class="form-group">
                         <label for="exampleFormControlTextarea1">Escriba su noticia</label>
@@ -73,5 +71,8 @@
                 </form>
         </div>
     </div>
+
+
+  
 
 {% endblock %}

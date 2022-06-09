@@ -16,10 +16,10 @@
                         <div class="card">
                           <div class="card-body">
                             <h5 class="card-title">{{ noticia.titulo}}</h5>
-                              <p id="notice" class="card-text">{{ noticia.texto }}.</p>
-                            <a href="{% url 'blog' noticia.id %}" class="btn btn-outline-secondary">Leer</a>
-                              <a href="/delete/noticia/{{ noticia.id }}" role="button" class=" mt-2 btn btn-danger">Eliminar</a>
-
+                                <p id="notice" class="card-text">{{ noticia.texto }}.</p>
+                                <a href="{% url 'blog' noticia.id %}" class="btn btn-outline-secondary">Leer</a>
+                                <!--<a href="/delete/noticia/{{ noticia.id }}" role="button" class=" mt-2 btn btn-danger">Eliminar</a>
+-->
                           </div>
                         </div>
                     </div>
@@ -31,6 +31,7 @@
             </div>
         </div>
     </div>
+    
     </div>
     <script>
         function ellipsis_box(elemento, max_chars){

@@ -1,0 +1,66 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+        <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1>Infomación y reserva de biblioteca</h1>
+                <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Bloque</th>
+                        <th scope="col">Lunes</th>
+                        <th scope="col">Martes</th>
+                        <th scope="col">Miercoles</th>
+                        <th scope="col">Jueves</th>
+                        <th scope="col">Viernes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row">8:30-10:00</th>
+                    <td><input type="text" class="form-control input-sm"  placeholder="Example input"></td>
+                    <td><input type="text" class="form-control input-sm"  placeholder="Example input"></td>
+                    <td><input type="text" class="form-control input-sm"  placeholder="Example input"></td>
+                    <td><input type="text" class="form-control input-sm"  placeholder="Example input"></td>
+                    <td><input type="text" class="form-control input-sm"  placeholder="Example input"></td>
+                    </tr>
+                    <tr>
+                    <th scope="row">10:30-12:00</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">12:10-13:30</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                    
+                    </tr>
+                    <tr>
+                    <th scope="row">8:30-10:00</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                    </tr>
+                    
+                </tbody>
+                </table>
+
+                
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

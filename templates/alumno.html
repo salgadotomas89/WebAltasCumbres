@@ -12,13 +12,38 @@
                     {% csrf_token %}
                     {{ form }}
                      <div class="form-group">
-                        <label for="nombreProfesor">Nombre</label>
-                        <input name="nombre" type="text" class="form-control" id="nombreProfesor" >
+                        <label for="nombre">Nombres</label>
+                        <input name="nombre" type="text" class="form-control" id="nombre" >
                      </div>
 
                     <div class="form-group">
-                        <label for="apellidoProfesor">Apellido</label>
-                        <input name="apellido" type="text" class="form-control" id="apellidoProfesor" >
+                        <label for="apellido">Apellidos</label>
+                        <input name="apellido" type="text" class="form-control" id="apellido" >
+                    </div>
+
+                     <div class="form-group">
+                        <label for="rut">Rut</label>
+                        <input name="rut" type="text" class="form-control" id="rut" >
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <div class="form-group mt-2">
+                        <label for="dp-bootstrap" >Fecha nacimiento</label>
+
+                         <div class="col-sm-2">
+	                        <input name="fechaNacimiento" type="text" class="dp-bootstrap">
+                         </div>
+                     </div>
+                     </div>
+
+                     <div class="form-group">
+                        <label for="nacionalidad">Nacionalidad</label>
+                        <input name="nacionalidad" type="text" class="form-control" id="nacionalidad" >
+                    </div>
+
+                     <div class="form-group">
+                        <label for="puebloOriginario">¿pertenece a algún ueblo originario?</label>
+                        <input name="puebloOriginario" type="text" class="form-control" id="puebloOriginario" >
                     </div>
 
                     <div class="form-group">
@@ -26,40 +51,54 @@
                         <input name="direccion" type="text" class="form-control" id="direccion" >
                     </div>
 
-
                     <div class="form-group mb-4 mt-4">
                         <select class="form-select" name="curso" aria-label="Default select example">
-                          <option selected>Curso</option>
-                          <option value="primero">primero</option>
-                          <option value="segundo">segundo</option>
-                          <option value="tercero">tercero</option>
-                          <option value="cuarto">cuarto</option>
-                          <option value="quinto">quinto</option>
-                          <option value="sexto">sexto</option>
-                          <option value="séptimo">septimo</option>
-                          <option value="octavo">octavo</option>
+                            <option selected>Curso</option>
+                            {% for curso in cursos %}
+                            <option value="{{curso}}" name="curso">{{curso.nombre}}</option>
+                            {% endfor %}
                         </select>
                     </div>
 
-                    
+                    <div class="form-group mb-4 mt-4">
+                        <select class="form-select" name="sexo" aria-label="Default select example">
+                            <option selected>sexo</option>
+                            <option value="masculino">masculino</option>
+                            <option value="femenino">femenino</option>
+                        </select>
+                    </div>
+
+            
                     <div class="form-group">
                         <label for="alergico">Alergico?</label>
                         <input name="alergico" type="text" class="form-control" id="alergico" >
-                     </div>
-
-
-                    
+                    </div>
 
                     <div class="form-group">
                         <label for="fono">Fono</label>
                         <input name="fono" type="text" class="form-control" id="fono" >
                      </div>
 
-
-                    <div class="form-group mb-4 mt-4">
-                        <input name="foto" type="file" class="form-control-file" >
+                     <div class="form-group">
+                        <label for="procedencia">Procedencia</label>
+                        <input name="procedencia" type="text" class="form-control" id="procedencia" >
                     </div>
 
+                    <div class="form-group">
+                        <label for="reprobado">Ha reprobado?</label>
+                        <input name="reprobado" type="text" class="form-control" id="reprobado" >
+                    </div>
+
+
+                    <div class="form-group mt-2">
+                        <div class="form-group mt-2">
+                        <label for="dp-bootstrap" >Fecha Incorporación</label>
+
+                         <div class="col-sm-2">
+	                        <input name="fechaIncorporacion" type="text" class="dp-bootstrap">
+                         </div>
+                     </div>
+                     </div>
 
                   <button type="submit" class="btn btn-primary mb-4 mt-4">Guardar</button>
                 </form>
@@ -69,7 +108,20 @@
     </div>
 
 
-     <script type="text/javascript">
+     <script type="text/javascript">        
+
+        $(function(){
+			if (!$.fn.bootstrapDP && $.fn.datepicker && $.fn.datepicker.noConflict) {
+            var datepicker = $.fn.datepicker.noConflict();
+            $.fn.bootstrapDP = datepicker;
+            }
+			$('.dp-bootstrap').bootstrapDP({
+                format: "dd-mm-yyyy",
+            });
+
+		});
+
+        
         $('#formAlumno').on('submit', function(e){
              
         e.preventDefault();
@@ -80,7 +132,7 @@
                 data: $('#formAlumno').serialize(),
                 
                 success: function(data){
-                   $('#output').html(data.msg) /* response message */
+                   $('#output').html(data.msg) 
                 },
          
                 failure: function() {
@@ -88,6 +140,7 @@
                 }
             });
         });    
+
       </script>
 
 {% endblock %}

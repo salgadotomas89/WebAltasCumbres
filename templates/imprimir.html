@@ -15,10 +15,6 @@
                     
                     {{ form }}
 
-
-                    
-                    
-
                      <div class=" form-group mt-2">
                         <label for="profesor">Nombre profesor o asistente de la educación</label>
                         <div class="col-md-2">
@@ -26,25 +22,15 @@
                         </div>
                      </div>
 
-            
-
                       <div class="form-group mt-2">
-                        <label for="datepicker" >Fecha para el que necesita la guía</label>
+                        <label for="dp-bootstrap" >Fecha para el que necesita la guía</label>
                         <p><small>Recuerde que si necesita las guías para hoy, estas no pueden ser para el primer bloque. Esto
                         porque se imprime desde 8:15 hasta 10:00</small></p>
 
                          <div class="col-sm-2">
-                             <div class="input-group date" id="datepicker">
-                                 <input name="fecha" type="text" class="form-control">
-                                 <span class="input-group-append">
-                                     <span class="input-group-text bg-white">
-                                         <i class="fa fa-calendar"></i>
-                                     </span>
-                                 </span>
-                             </div>
+	                        <input name="fecha" type="text" class="dp-bootstrap">
                          </div>
                      </div>
-
 
                      <div class="form-group mt-2 ">
 
@@ -84,13 +70,13 @@
 
                      <div class="form-group mt-2">
                         <label for="cantidad">Cantidad</label>
+                        <p><small>este numero se puede modificar!!</small></p>
                         <div class="col-md-1">
                             <input name="cantidad" type="text" class="form-control  border-primary" id="cantidad" >
                         </div>
                      </div>
 
                     
-
                          <div class="form-group mt-2">
                         <div class="form-group col-md-2">
                             <label for="exampleFormControlFile1">Documento</label>
@@ -103,16 +89,7 @@
 
                              
                     </div>
-                      
-
-
-                     
-
-
                     
-
-
-
 
 
                   {% if messages %}
@@ -131,21 +108,26 @@
     
 
      <script type="text/javascript">
+        
 
-        $(function() {
-            $('#datepicker').datepicker();
-        });
-
-        $('#myList a').on('click', function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-})
-
+        $(function(){
+			if (!$.fn.bootstrapDP && $.fn.datepicker && $.fn.datepicker.noConflict) {
+            var datepicker = $.fn.datepicker.noConflict();
+            $.fn.bootstrapDP = datepicker;
+        }
+            var date = new Date();
+            date.setDate(date.getDate()-1);
+			$('.dp-bootstrap').bootstrapDP({
+                    startDate: date,
+                    format: "dd-mm-yyyy",
+            });
+			
+		});
 
         const autoCompleteJS = new autoComplete({
             placeHolder: " ",
             data: {
-                src: ["Jasna Gonzalez", "Michelle Quilodrán", "Gonzalo Sanhueza"],
+                src: ["Jasna Gonzalez", "Michelle Quilodrán", "Gonzalo Sanhueza", "Carla Morales"],
                 cache: true,
             },
             resultItem: {

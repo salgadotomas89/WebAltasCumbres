@@ -4,21 +4,37 @@
 
 
 {% block content %}
-    
-    <div class="container text-left">
-        <div class="p-5 mb-4 mt-4 bg-light rounded-3">
-            <div class="container-fluid py-5 text-center">
-                <h1 class="display-5 fw-bold">Galeria de fotos</h1>
-                {% for n in noticias  %}
-                    <h3 class="text-success">{{n.titulo}}</h3>
-                    {% for f in fotos%}
-                        {% if f.noticia == n%}
-                            <img src="{{  f.image.url }}" class="rounded mt-2" height="100%" width="100%" alt="...">
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}
+    <link rel="stylesheet" href="{% static 'css/fluid-gallery.css'%}">
+
+    <div class="container gallery-container">
+
+    <h1>Fotos Altas Cumbres</h1>
+
+    {% for n in noticias  %}
+    {% if n.noticia == False%}
+    <div class="tz-gallery">
+        <h3 class="text-success">{{n.titulo}}</h3>
+            <div class="row">
+            {% for f in fotos%}
+                {% if f.noticia == n%}
+                <div class="col-sm-4 col-md-2">
+                    <a class="lightbox" href="..{{  f.image.url }}">
+                        <img class="img-fluid" src="{{  f.image.url }}">
+                    </a>
+                </div>
+                {% endif %}
+            {% endfor %}
             </div>
-        </div>
     </div>
+    {% endif %}
+
+    {% endfor %}
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+<script>
+    baguetteBox.run('.tz-gallery');
+</script>
 
 {% endblock %}

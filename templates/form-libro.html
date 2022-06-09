@@ -1,0 +1,125 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+          <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+              <h1>Ingresar Libro a base de datos</h1>
+                <form class="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+                     <div class="form-group">
+                        <label for="nombre">Nombre libro</label>
+                        <input name="nombre" type="text" class="form-control" id="nombre" >
+                     </div>
+
+                    <div class="form-group">
+                        <label for="autor">Autor</label>
+                        <input name="autor" type="text" class="form-control" id="autor" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="isbn">ISBN</label>
+                        <input name="isbn" type="text" class="form-control" id="isbn" >
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label for="editorial">Editorial</label>
+                        <input name="editorial" type="text" class="form-control" id="editorial" >
+                     </div>
+
+                     <div class="form-group">
+                        <label for="resumen">Resumen</label>
+                        <textarea name="resumen" class="form-control" id="resumen" rows="3"></textarea>
+                      </div>
+
+                      <div class="form-group mt-2 ">
+
+                        <label for="cantidad">Tema al que pertenece</label>
+
+                        <div class="col-md-8">
+
+
+                        <input   type="radio" class="btn-check " value="infantil" name="tema" id="infantil" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="infantil" >infantil</label>
+
+                        <input type="radio" class="btn-check" value="juvenil" name="tema" id="juvenil" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="juvenil">juvenil</label>
+
+                        <input type="radio" class="btn-check" value="narrativa" name="tema" id="curso3" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="curso3">narrativa</label>
+
+                         <input type="radio" class="btn-check" value="historia" name="tema" id="curso4" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="curso4">historia</label>
+
+                        <input type="radio" class="btn-check" value="geografia" name="tema" id="geografia" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="geografia">geografia</label>
+
+                         <input type="radio" class="btn-check" value="ciencias sociales" name="tema" id="ciencias sociales" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="ciencias sociales">ciencias sociales</label>
+
+                        <input type="radio" class="btn-check" value="medicina" name="tema" id="medicina" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="medicina">medicina</label>
+
+
+                        <input type="radio" class="btn-check" value="ciencias fisicas" name="tema" id="ciencias fisicas" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="ciencias fisicas">ciencias fisicas</label>
+
+
+                        <input type="radio" class="btn-check" value="filosofia" name="tema" id="filosofia" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="filosofia">filosofia</label>
+
+                         <input type="radio" class="btn-check" value="ciencias ambientales" name="tema" id="ciencias ambientales" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="ciencias ambientales">ciencias ambientales</label>
+
+                        <input type="radio" class="btn-check" value="arquitectura" name="tema" id="arquitectura" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="arquitectura">arquitectura</label>
+
+
+                        <input type="radio" class="btn-check" value="artes plasticas" name="tema" id="artes plasticas" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="artes plasticas">artes plasticas </label>
+
+                        <input type="radio" class="btn-check" value="gastronomia" name="tema" id="gastronomia" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="gastronomia">gastronomia </label>
+                        
+                    </div>
+
+                        
+                    </div>
+
+
+                    <div class="form-group mt-2">
+                        <label for="cantidad">Cantidad</label>
+                        
+                        <div class="col-md-1">
+                            <input name="cantidad" type="text" class="form-control  border-primary" id="cantidad" >
+                        </div>
+                     </div>
+
+
+                    <div class="form-group mb-4 mt-4">
+                        <input name="foto" type="file" class="form-control-file" >
+                    </div>
+                    
+                  
+
+
+                  <button type="submit" class="btn btn-primary mb-4 mt-4">Guardar</button>
+
+
+                  {% if messages %}
+                  <ul class="messages">
+                      {% for message in messages %}
+                      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                      {% endfor %}
+                  </ul>
+                  {% endif %}
+                </form>
+        </div>
+    </div>
+
+{% endblock %}
