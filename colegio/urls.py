@@ -1,12 +1,28 @@
+from re import template
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from colegio import views
 from djangoProject import settings
+from django.contrib.auth.views import LoginView
 
 
 
 urlpatterns = [
+    path('torneos', views.torneos),
+    path('ranking', views.ranking),
+    path('info/alumno/<int:id>', views.info),
+    path('info/<int:id>', views.infoAlumnos),
+    path('madre/<int:id>/', views.madre),
+    path('padre/<int:id>/', views.padre),
+    path('tutor/<int:id>/', views.tutor, name='tutor'),
+    path('select/madre/<int:idMadre>/<int:idAlumno>', views.selectMadre),
+    path('select/padre/<int:idPadre>/<int:idAlumno>', views.selectPadre),
+    path('select/tutor/<int:idTutor>/<int:idAlumno>', views.selectTutor),
+    path('cursos', views.cursos, name='cursos'),
+    path('inicio', views.inicio, name='inicio'),
+    path('registro', views.registro, name='register'),
+    path('login', LoginView.as_view(template_name='login.html'), name='login'),
     path('', views.index, name='index'),
     path('blog/<int:idnotice>', views.blog, name='blog'),
     path('directiva', views.directiva, name="directiva"),
@@ -32,9 +48,10 @@ urlpatterns = [
     path('reglamentointerno', views.show_rice, name='reglamentointerno'),
     path('evaluacion', views.show_eva, name='evaluacion'),
     path('eventos', views.eventos, name='eventos'),
-    path('add/alumno', views.add_alumno),
+    path('encuesta', views.encuesta, name='encuesta'),
     path('add/libro', views.libro),
-    path('savealumno', views.savealumno, name='savealumno'),
+    path('alumno', views.savealumno, name='alumno'),
+    path('apoderado', views.apoderado, name='apoderado'),
     path('delete/evento/<int:id>', views.destroy),
     path('delete/alumno/<int:id>', views.destroy_alumno),
     path('delete/noticia/<int:id>', views.destroy_noticia),

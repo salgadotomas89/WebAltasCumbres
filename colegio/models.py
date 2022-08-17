@@ -4,6 +4,10 @@ from operator import mod
 from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.forms import BooleanField, CharField
 from django.utils import timezone
 import os
 
@@ -73,26 +77,95 @@ class Curso(models.Model):
     nombre = models.CharField(max_length=100)
     profesorJefe = models.OneToOneField(Profesor, on_delete=models.CASCADE, null=True, blank=True)
 
+class Padre(models.Model):
+    participacion = BooleanField()
+    rut = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=100)
+    apellidos = models.CharField(max_length=100)
+    estadoCivil = models.CharField(max_length=100)
+    direccion = models.CharField(max_length=100)
+    ocupacion = models.CharField(max_length=100)
+    lugarTrabajo = models.CharField(max_length=100)
+    nivel = models.CharField(max_length=100)
+    profesion = models.CharField(max_length=100)
+    fechaNacimiento = models.DateTimeField(default=timezone.now)
+    telefono = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
+
+
+class Madre(models.Model):
+    participacion = BooleanField()
+    rut = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=100)
+    apellidos = models.CharField(max_length=100)
+    estadoCivil = models.CharField(max_length=100)
+    direccion = models.CharField(max_length=100)
+    ocupacion = models.CharField(max_length=100)
+    lugarTrabajo = models.CharField(max_length=100)
+    nivel = models.CharField(max_length=100)
+    profesion = models.CharField(max_length=100)
+    fechaNacimiento = models.DateTimeField(default=timezone.now)
+    telefono = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
+
+class Tutor(models.Model):
+    rut = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=100)
+    apellidos = models.CharField(max_length=100)
+    trabajo = models.CharField(max_length=200)
+
+class Apoderado(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True)
+    rut = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=100)
+    apellidos = models.CharField(max_length=100)
+    parentesco = models.CharField(max_length=200, default='padre')
+    direccion = models.CharField(max_length=100)
+    ocupacion = models.CharField(max_length=100)
+    telefono = models.CharField(max_length=100)
 
 class Alumno(models.Model):
-    #antecedentes personales
+    apoderado = models.ForeignKey(Apoderado, on_delete=models.CASCADE, null=True, blank=True)
+    #antecedentes estudiante
     nombre = models.CharField(max_length=100)
-    apellido = models.CharField(max_length=100)
+    paterno = models.CharField(max_length=100, null=True)
+    materno = models.CharField(max_length=100)
     rut = models.CharField(max_length=100)
-    nacionalidad = models.CharField(max_length=100)
+    nacionalidad = models.CharField(max_length=100, blank=True, default='chilena')
     puebloOriginario = models.BooleanField(default='no', blank=True)
     edad = models.IntegerField(default=0, blank=True)
     fechaNacimiento = models.DateTimeField(default=timezone.now)
     sexo = models.CharField(max_length=100)
-    alergico = models.CharField(max_length=100, default='no', blank=True)
     direccion = models.CharField(max_length=100)
-    fono = models.CharField(max_length=20)
-    #antecedentes escolares
-    procedencia = models.CharField(max_length=100)
-    reprobado = models.CharField(max_length=100)
+    #antecedentes academicos
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    procedencia = models.CharField(max_length=200, blank=True)
     fechaIncorporacion = models.DateTimeField(default=timezone.now)
-    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, default='1', blank=True)
-    
+    religion = models.CharField(max_length=200, blank='True')
+    reprobado = models.CharField(max_length=200, blank='True', default='No')
+    hermanos = models.CharField(max_length=200,blank=True, default='No')
+    #antecedentes sociales y del aprendizaje
+    socioeconomica = models.TextField(max_length=200, null=True)
+    beca = models.CharField(max_length=200, blank=True, default='no posee')
+    pie = models.CharField(max_length=200, blank=True, default='no pertenece')
+    #antecedentes de salud
+    enfermedades = models.CharField(max_length=100, default='no', blank=True)
+    alergico = models.CharField(max_length=100, default='no', blank=True)
+    vision = models.CharField(max_length=100, default='normal', blank=True)
+    lentes = models.CharField(max_length=100, default='no', blank=True)
+    audicion = models.CharField(max_length=100, default='no', blank=True)
+    audifonos = models.CharField(max_length=100, default='no', blank=True)
+    sanguineo = models.CharField(max_length=100,  blank=True)
+    salud = models.CharField(max_length=100, default='AFP', blank=True)
+    peso = models.CharField(max_length=100, blank=True)
+    talla = models.CharField(max_length=100, blank=True)
+    problema = models.CharField(max_length=100, default='no', blank=True)
+    emergencia = models.CharField(max_length=100, blank=True)
+    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, null=True, blank=True)
+    padre = models.ForeignKey(Padre, on_delete=models.CASCADE, null=True, blank=True)
+    madre = models.ForeignKey(Madre, on_delete=models.CASCADE, null=True, blank=True)
+
+
     
 #guia es el documento que envian los profesores o asistentes a imprimir
 class Guia(models.Model):

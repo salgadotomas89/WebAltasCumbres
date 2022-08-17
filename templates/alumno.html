@@ -7,57 +7,35 @@
 
     <div class="container text-left">
           <div class="p-5 mb-4 mt-4 bg-light rounded-3">
-              <h1>Ingresar Alumno</h1>
+              <h1>Antecedentes Estudiante</h1>
                 <form id="formAlumno" class="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form }}
                      <div class="form-group">
-                        <label for="nombre">Nombres</label>
+                        <label for="nombre">Nombre</label>
                         <input name="nombre" type="text" class="form-control" id="nombre" >
                      </div>
 
                     <div class="form-group">
-                        <label for="apellido">Apellidos</label>
-                        <input name="apellido" type="text" class="form-control" id="apellido" >
-                    </div>
-
-                     <div class="form-group">
-                        <label for="rut">Rut</label>
-                        <input name="rut" type="text" class="form-control" id="rut" >
-                    </div>
-
-                    <div class="form-group mt-2">
-                        <div class="form-group mt-2">
-                        <label for="dp-bootstrap" >Fecha nacimiento</label>
-
-                         <div class="col-sm-2">
-	                        <input name="fechaNacimiento" type="text" class="dp-bootstrap">
-                         </div>
-                     </div>
-                     </div>
-
-                     <div class="form-group">
-                        <label for="nacionalidad">Nacionalidad</label>
-                        <input name="nacionalidad" type="text" class="form-control" id="nacionalidad" >
-                    </div>
-
-                     <div class="form-group">
-                        <label for="puebloOriginario">¿pertenece a algún ueblo originario?</label>
-                        <input name="puebloOriginario" type="text" class="form-control" id="puebloOriginario" >
+                        <label for="paterno">Apellido Paterno</label>
+                        <input name="paterno" type="text" class="form-control" id="paterno" >
                     </div>
 
                     <div class="form-group">
-                        <label for="direccion">Dirección</label>
-                        <input name="direccion" type="text" class="form-control" id="direccion" >
+                        <label for="materno">Apellido Materno</label>
+                        <input name="materno" type="text" class="form-control" id="materno" >
+                    </div>
+                    
+                    <div class="form-group mt-2">
+                        <label for="dp-bootstrap" >Fecha nacimiento</label>
+                         <div class="col-sm-2">
+	                        <input name="fechaNacimiento" type="text" class="dp-bootstrap">
+                         </div>
                     </div>
 
-                    <div class="form-group mb-4 mt-4">
-                        <select class="form-select" name="curso" aria-label="Default select example">
-                            <option selected>Curso</option>
-                            {% for curso in cursos %}
-                            <option value="{{curso}}" name="curso">{{curso.nombre}}</option>
-                            {% endfor %}
-                        </select>
+                    <div class="form-group">
+                        <label for="rut">Rut</label>
+                        <input name="rut" type="text" class="form-control" id="rut" >
                     </div>
 
                     <div class="form-group mb-4 mt-4">
@@ -68,79 +46,181 @@
                         </select>
                     </div>
 
-            
-                    <div class="form-group">
-                        <label for="alergico">Alergico?</label>
-                        <input name="alergico" type="text" class="form-control" id="alergico" >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fono">Fono</label>
-                        <input name="fono" type="text" class="form-control" id="fono" >
-                     </div>
 
                      <div class="form-group">
-                        <label for="procedencia">Procedencia</label>
-                        <input name="procedencia" type="text" class="form-control" id="procedencia" >
+                        <label for="nacionalidad">Nacionalidad</label>
+                        <p class='text-success'><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Si el estudiante nació en Chile, no modificar </small></p>
+                        <input name="nacionalidad" type="text" class="form-control" id="nacionalidad" value='Chilena'>
+                    </div>
+
+                     <div class="form-group">
+                        <label for="puebloOriginario">¿pertenece a algún pueblo originario?</label>
+                        <input name="puebloOriginario" type="text" class="form-control" id="puebloOriginario" >
                     </div>
 
                     <div class="form-group">
-                        <label for="reprobado">Ha reprobado?</label>
-                        <input name="reprobado" type="text" class="form-control" id="reprobado" >
+                        <label for="direccion">Dirección</label>
+                        <input name="direccion" type="text" class="form-control" id="direccion" >
+                    </div>
+
+                    <h1>Antecedentes academicos</h1>
+
+                    <div class="form-group mb-4 mt-4">
+                        <select class="form-select" name="curso" aria-label="Default select example">
+                            <option selected>Curso</option>
+                            {% for curso in cursos %}
+                                <option value="{{curso.id}}" >{{curso.nombre}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="procedencia">Colegio de procedencia</label>
+                        <input name="procedencia" type="text" class="form-control" id="procedencia" >
                     </div>
 
 
                     <div class="form-group mt-2">
-                        <div class="form-group mt-2">
-                        <label for="dp-bootstrap" >Fecha Incorporación</label>
-
+                        <label for="dp-bootstrap" >Fecha</label>
                          <div class="col-sm-2">
 	                        <input name="fechaIncorporacion" type="text" class="dp-bootstrap">
                          </div>
-                     </div>
-                     </div>
+                    </div>
 
-                  <button type="submit" class="btn btn-primary mb-4 mt-4">Guardar</button>
+                     <div class="form-group">
+                        <label for="religion">Religión</label>
+                        <input name="religion" type="text" class="form-control" id="religion" >
+                    </div>
+
+                     <div class="form-group">
+                        <label for="reprobado">Ha reprobado?</label>
+                        <p class='text-success'><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Si el estudiante no ha reprobado, no modificar </small></p>
+                        <input name="reprobado" type="text" class="form-control" id="reprobado" value='No' >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="hermanos">Tiene hermanos en el colegio?</label>
+                        <p class='text-success'><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Si el estudiante no tiene hermanos, no modificar </small></p>
+
+                        <input name="hermanos" type="text" class="form-control" id="hermanos" value='No tiene'>
+                    </div>
+
+                   
+                    <div class="form-group">
+                        <label for="alergico">Alergico?</label>
+                        <p class='text-success'><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Si el estudiante no es alergico, no modificar</small></p>
+
+                        <input name="alergico" type="text" class="form-control" id="alergico" value='No es alergico'>
+                    </div>
+
+                    <h1>Antecedentes sociales y del aprendizaje</h1>
+                    
+                    <div class="form-group">
+                        <label for="socioeconomica">Clasificación socioeconomica:</label>
+                        <input name="socioeconomica" type="text" class="form-control" id="socioeconomica" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="beca">¿Posee alguna beca? ¿Cuál?</label>
+                        <p class='text-success'><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Si el estudiante no posee alguna beca, no modificar</small></p>
+
+                        <input name="beca" type="text" class="form-control" id="beca" value='No posee'>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="alergico">¿Está en Programa de Integración Escolar/ PIE?</label>
+                        <p class='text-success'><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            Si el estudiante no esta dentro de este programa, no modificar!!</small></p>
+                        <input name="alergico" type="text" class="form-control" id="alergico"  value='No pertenece'>
+                    </div>
+
+
+                    <h1>Antecedentes de salud</h1>
+
+                    <div class="form-group">
+                        <label for="Enfermedades">Enfermedades</label>
+                        <input name="enfermedades" type="text" class="form-control" id="Enfermedades" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="alergico">¿Es alergico? si lo es escriba el elemento</label>
+                        <input name="alergico" type="text" class="form-control" id="alergico" value="no">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vision">Tipo de visión del estudiante ?</label>
+                        <input name="vision" type="text" class="form-control" id="vision" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lentes">¿Usa lentes opticos?</label>
+                        <input name="lentes" type="text" class="form-control" id="lentes" value="no" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="audicion">Tipo de audicion del estudiantes:</label>
+                        <input name="audicion" type="text" class="form-control" id="audicion" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="audifono">¿Usa audifono? </label>
+                        <input name="audifono" type="text" class="form-control" id="audifono" value="no">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="grupo">Grupo sanguineo:</label>
+                        <input name="grupo" type="text" class="form-control" id="grupo" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sistema">Sistema de salud:</label>
+                        <input name="sistema" type="text" class="form-control" id="sistema" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="peso">Peso:</label>
+                        <input name="peso" type="text" class="form-control" id="peso" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="talla">Talla:</label>
+                        <input name="talla" type="text" class="form-control" id="talla" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="problema">Tiene algun problema a nivel: Cardiaco o Columna?</label>
+                        <input name="problema" type="text" class="form-control" id="problema" value="no">
+                    </div>
+
+
+                   
+                  <button type="submit" class="btn btn-primary mb-4 mt-4">Guardar y seguir con la encuesta <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                  </button>
                 </form>
-                <div id="output">
-                </div>
+                
         </div>
     </div>
 
-
-     <script type="text/javascript">        
+    <script type="text/javascript">
+        
 
         $(function(){
 			if (!$.fn.bootstrapDP && $.fn.datepicker && $.fn.datepicker.noConflict) {
             var datepicker = $.fn.datepicker.noConflict();
             $.fn.bootstrapDP = datepicker;
-            }
+        }
+            var date = new Date();
+            date.setDate(date.getDate()-1);
 			$('.dp-bootstrap').bootstrapDP({
-                format: "dd-mm-yyyy",
+                    
             });
-
+			
 		});
 
-        
-        $('#formAlumno').on('submit', function(e){
-             
-        e.preventDefault();
+    </script>
 
-            $.ajax({
-                type : "POST", 
-                url: "{% url 'savealumno' %}",
-                data: $('#formAlumno').serialize(),
-                
-                success: function(data){
-                   $('#output').html(data.msg) 
-                },
-         
-                failure: function() {
-                    
-                }
-            });
-        });    
 
-      </script>
+     
 
 {% endblock %}

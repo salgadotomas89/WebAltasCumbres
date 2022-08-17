@@ -1,0 +1,115 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+          <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+              <h1>Antecedentes del padre</h1>
+                <form id="formAlumno" class="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+                    
+                    <div class="form-group">
+                        <label for="participacion">¿Participa en la crianza del alumno ? {{alumnoId}}</label>
+                        <input name="participacion" type="text" class="form-control" value='si' id="participacion"  >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rut">Rut</label>
+                        <input name="rut" type="text" class="form-control" id="rut" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input name="nombre" type="text" class="form-control" id="nombre" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apellidos">Apellidos</label>
+                        <input name="apellidos" type="text" class="form-control" id="apellidos" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estado">Estado civil</label>
+                        <input name="estadoCivil" type="text" class="form-control" id="estado" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input name="direccion" type="text" class="form-control" id="direccion" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ocupacion">Ocupación</label>
+                        <input name="ocupacion" type="text" class="form-control" id="ocupacion" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trabajo">Lugar de trabajo</label>
+                        <input name="lugarTrabajo" type="text" class="form-control" id="trabajo" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nivel">Nivel educacional</label>
+                        <p class='text-success'><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Primaria, secundaria o superior </small></p>
+                        <input name="nivel" type="text" class="form-control" id="nivel" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profesion">Profesión</label>
+                        <input name="profesion" type="text" class="form-control" id="profesion" >
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <div class="form-group mt-2">
+                        <label for="dp-bootstrap" >Fecha nacimiento</label>
+
+                         <div class="col-sm-2">
+	                        <input name="fechaNacimiento" type="text" class="dp-bootstrap">
+                         </div>
+                        </div>
+                     </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Telefono</label>
+                        <input name="telefono" type="text" class="form-control" id="telefono" >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input name="email" type="text" class="form-control" id="email" >
+                    </div>
+
+                    <input type="hidden" id="idAlumno" name="idAlumno" value="{{idAlumno}}">
+
+                
+                     <button type="submit" class="btn btn-primary mb-4 mt-4">Guardar -></button>
+                </form>
+                <div id="output">
+                </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        
+
+        $(function(){
+			if (!$.fn.bootstrapDP && $.fn.datepicker && $.fn.datepicker.noConflict) {
+            var datepicker = $.fn.datepicker.noConflict();
+            $.fn.bootstrapDP = datepicker;
+        }
+            var date = new Date();
+            date.setDate(date.getDate()-1);
+			$('.dp-bootstrap').bootstrapDP({
+                    
+            });
+			
+		});
+
+    </script>
+
+     
+{% endblock %}

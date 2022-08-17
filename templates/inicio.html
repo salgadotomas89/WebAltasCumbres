@@ -1,0 +1,191 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+        <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                {% csrf_token %}
+
+
+                <h1>Apoderado </h1>
+                <h6 class="text-success">nombre de usuario: {{username}}</h6>
+                <p class="fs-5 col-md-8">A continuación puede completar sus datos de apoderado, 
+                    para luego agregar los datos de su pupilo. Recuerde completar todos los datos 
+                </p>
+
+                <div class="mb-5">
+                    {% if apoderado == 'no'%}
+                    <a href="{% url 'apoderado' %}"><button type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">Agregar datos </button>
+                    </a>
+
+                    {% else %}
+
+                    <a href="{% url 'apoderado' %}"><button disabled type="button" class=" mt-4 btn btn-outline-success btn-lg px-4 me-sm-3 fw-bold">Datos completados </button>
+                    
+                    </a>
+
+                     {% endif %}
+
+                </div>
+
+                <hr class="col-3 col-md-2 mb-5">
+               
+
+
+
+                <h1>Alumno(s)</h1>
+                
+
+                
+
+                
+
+                <p class="fs-5 col-md-8">A continuación debe rellenar los datos de su pupilo(s). Es importante
+                    que lea complete los datos con calma para que no haya errores. Si ud es apoderados de más
+                    de un niño, debe completar la encuesta por cada uno de ellos.
+                </p>
+
+                <div class="mb-5">
+                    <a href="{% url 'alumno' %}"><button type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">Agregar alumno </button>
+                    </a>                
+                </div>
+
+                <hr class="col-3 col-md-2 ">
+
+
+                {% if alumnos == None %}
+                    <p>no hay alumnos inscritos</p>
+
+                {% else %}
+                <!--si hay alumnos-->
+
+                        {% if alumnos|length > 1 %}
+                            {% for alumno in alumnos %}
+                            <div class="row">
+                                <div class="col-md-12 mt-4">
+
+                                <h2 ><i class="fa fa-user" aria-hidden="true"></i>
+                                    {{alumno.nombre}} {{alumno.paterno}} {{alumno.materno}}</h2>
+
+                                <h4 class="mt-4">Antecedentes del padre</h4>
+
+                                <!--si alumno no tiene padre-->
+                                {% if alumno.padre == null %}
+                                    {% for student in alumnos %}
+                                        <!--si el estudiante no tiene un tutor asignado recorremos los que estan inscritos en sus hermanos-->
+                                        {% if student.padre != null %}
+                                        
+                                        <a href="select/padre/{{ student.padre.id }}/{{alumno.id}}"><button  type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">Seleccionar a {{student.padre.nombre}} </button>
+                                        </a>
+                                        
+                                        {% endif %}
+                                    {% endfor %}
+                                    <!--opcion de agregar padre-->
+                                    <a href="padre/{{ alumno.id }}"><button  type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">Agregar datos del padre </button>
+                                    </a>
+                                {% else %}
+                                <!--si el alumno tiene padre mostramos el nombre-->
+                                    <a href="padre/{{ alumno.id }}"><button  disabled type="button" class="mt-4 btn btn-outline-success btn-lg px-4 me-sm-3 fw-bold">padre: {{alumno.padre.nombre}} {{alumno.padre.apellidos}}</button>
+                                    </a> 
+                                {% endif %}
+
+                                <h4 class="mt-4">Antecedentes de la madre</h4>
+
+                                <!--si alumno no tiene padre-->
+                                {% if alumno.madre == null %}
+                            
+                                {% for student in alumnos %}
+                                        <!--si el estudiante no tiene un tutor asignado recorremos los que estan inscritos en sus hermanos-->
+                                        {% if student.madre != null %}
+                                        
+                                        <a href="select/madre/{{ student.madre.id }}/{{alumno.id}}"><button  type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">Seleccionar a {{student.madre.nombre}} </button>
+                                        </a>
+                                        
+                                        {% endif %}
+                                    {% endfor %}
+                                    <!--opcion de agregar padre-->
+                                    <a href="madre/{{ alumno.id }}"><button  type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">Agregar datos de la madre </button>
+                                    </a>
+                                {% else %}
+                                <!--si el alumno tiene padre mostramos el nombre-->
+                                    <a href="madre/{{ alumno.id }}"><button  disabled type="button" class="mt-4 btn btn-outline-success btn-lg px-4 me-sm-3 fw-bold">madre: {{alumno.madre.nombre}} {{alumno.madre.apellidos}}</button>
+                                    </a> 
+                                {% endif %} 
+
+                                <h4 class="mt-4">Tutor economico</h4>
+    
+                                {% if alumno.tutor == null %}
+                                    {% for student in alumnos %}
+                                        <!--si el estudiante no tiene un tutor asignado recorremos los que estan inscritos en sus hermanos-->
+                                        {% if student.tutor != null %}
+                                        
+                                        <a href="select/tutor/{{ student.tutor.id }}/{{alumno.id}}"><button  type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">Seleccionar a {{student.tutor.nombre}} </button>
+                                        </a>
+                                        
+                                        {% endif %}
+                                    {% endfor %}
+                                    <a href="tutor/{{ alumno.id }}"><button  type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">Agregar datos del tutor </button>
+                                    </a>
+                                {% else %}
+                                    <a href="tutor/{{ alumno.id }}"><button  disabled type="button" class="mt-4 btn btn-outline-success btn-lg px-4 me-sm-3 fw-bold">tutor econ: {{alumno.tutor.nombre}} {{alumno.tutor.apellidos}}</button>
+                                    </a> 
+                                {% endif %}
+
+                            </div>
+                            </div>
+                            {% endfor %}
+                        {% else%}
+                        <!--si hay solo un alumno-->
+                            <h2>{{alumnos.nombre}} {{alumnos.paterno}} {{alumnos.materno}}</h2>
+                            {% if alumnos.padre == null %}
+                            <p>hello</p>
+
+                            <a href="padre/{{ alumnos.id }}"><button  type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">Agregar datos del padre </button>
+                            </a> 
+                            {% else %}
+                            <p>hola</p>
+                            <a href="padre/{{ alumnos.id }}"><button disabled  type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">{{alumnos.padre.nombre}}</button>
+                            </a> 
+                            {% endif %}
+
+                            {% if alumnos.madre == null %}
+                            <a href="madre/{{ alumnos.id }}"><button  type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">Agregar datos de la madre </button>
+                            </a>
+                            {% else %}
+                            <a href="madre/{{ alumnos.id }}"><button disabled  type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">{{alumnos.madre.nombre}} </button>
+                            </a>
+                            {% endif %}
+
+                            {% if alumnos.tutor == null %}
+                            <a href="tutor/{{ alumnos.id }}"><button  type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">Agregar datos del tutor </button>
+                            </a>
+                            {% else %}
+                            <a href="tutor/{{ alumnos.id }}"><button disabled type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">{{alumnos.tutor.nombre}}</button>
+                            </a>
+                            {% endif %}
+
+                            
+                        {% endif %}
+
+                {% endif %}
+
+                
+
+                    
+                    
+                
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+<script>
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+      })
+</script>

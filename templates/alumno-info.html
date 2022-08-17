@@ -1,0 +1,431 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+        <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <main>
+                    <div class="py-5 text-center">
+                      <h2>Checkout form</h2>
+                    </div>
+                
+                    <div >
+                      
+                      <div class="col-md-7 col-lg-8">
+                        <h4 class="mb-3">Billing address</h4>
+                        <form class="needs-validation" novalidate>
+                          <div class="row g-3">
+                            <div class="col-sm-6">
+                              <label >Nombre</label>
+                              <label type="text" class="form-control" id="lastName">{{alumno.nombre}}</label>
+                            </div>
+                
+                            <div class="col-sm-6">
+                              <label for="lastName" class="form-label">Apellidos</label>
+                              <label type="text" class="form-control" id="lastName">{{alumno.paterno}} {{alumno.materno}}</label>
+                              
+                            </div>
+
+
+                            <div class="col-sm-6">
+                                <label >Rut</label>
+                                <label type="text" class="form-control" >{{alumno.rut}}</label>
+                            </div>
+                  
+                            <div class="col-sm-6">
+                                <label  class="form-label">Nacionalidad</label>
+                                <label type="text" class="form-control" >{{alumno.nacionalidad}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Edad</label>
+                                <label type="text" class="form-control" >{{alumno.edad}}</label>
+                            </div>
+                  
+                            <div class="col-sm-6">
+                                <label  class="form-label">Pertenece a algún pueblo originario</label>
+                                <label type="text" class="form-control" >{{alumno.puebloOriginario}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Fecha nacimiento</label>
+                                <label type="text" class="form-control" >{{alumno.fechaNacimiento}}</label>
+                            </div>
+                  
+                            <div class="col-sm-6">
+                                <label  class="form-label">Sexo</label>
+                                <label type="text" class="form-control" >{{alumno.sexo}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Dirección</label>
+                                <label type="text" class="form-control" >{{alumno.direccion}}</label>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Curso</label>
+                                <label type="text" class="form-control" >{{alumno.curso.nombre}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Procedencia</label>
+                                <label type="text" class="form-control" >{{alumno.procedencia}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Fecha incorporación</label>
+                                <label type="text" class="form-control" >{{alumno.fechaIncorporacion}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Religión</label>
+                                <label type="text" class="form-control" >{{alumno.religion}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Ha reprobado?=</label>
+                                <label type="text" class="form-control" >{{alumno.reprobado}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Tiene hermanos</label>
+                                <label type="text" class="form-control" >{{alumno.hermanos}}</label>
+                            </div>
+
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Clasificación socioeconomica</label>
+                                <label type="text" class="form-control" >{{alumno.socioeconomica}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Beca</label>
+                                <label type="text" class="form-control" >{{alumno.beca}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Pertenece a pie</label>
+                                <label type="text" class="form-control" >{{alumno.pie}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Enfermedades</label>
+                                <label type="text" class="form-control" >{{alumno.enfermedades}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Es alergico</label>
+                                <label type="text" class="form-control" >{{alumno.alergico}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Estado de su visión</label>
+                                <label type="text" class="form-control" >{{alumno.vision}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Usa lentes</label>
+                                <label type="text" class="form-control" >{{alumno.lentes}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Estado de su audición</label>
+                                <label type="text" class="form-control" >{{alumno.audicion}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Usa audifonos</label>
+                                <label type="text" class="form-control" >{{alumno.audifonos}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Grupo sanguineo</label>
+                                <label type="text" class="form-control" >{{alumno.sanguineo}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">salud</label>
+                                <label type="text" class="form-control" >{{alumno.salud}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Peso</label>
+                                <label type="text" class="form-control" >{{alumno.peso}}</label>
+                            </div>
+
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Talla</label>
+                                <label type="text" class="form-control" >{{alumno.talla}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Problema</label>
+                                <label type="text" class="form-control" >{{alumno.problema}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Emergencia</label>
+                                <label type="text" class="form-control" >{{alumno.emergencia}}</label>
+                                
+                            </div>
+
+                            <hr class="my-4">
+                
+                            <h4 class="mb-3">Tutor economico</h4>
+
+                            <div class="col-sm-6">
+                                <label >Tutor</label>
+                                <label type="text" class="form-control" >{{alumno.tutor.nombre}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Apellidos</label>
+                                <label type="text" class="form-control" >{{alumno.tutor.apellidos}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Rut</label>
+                                <label type="text" class="form-control" >{{alumno.tutor.rut}}</label>
+                                
+                            </div>
+                            <div class="col-sm-6">
+                                <label  class="form-label">Trabajo</label>
+                                <label type="text" class="form-control" >{{alumno.tutor.trabajo}}</label>
+                                
+                            </div>
+
+                            <hr class="my-4">
+                
+                            <h4 class="mb-3">Apoderado</h4>
+
+                            <div class="col-sm-6">
+                                <label >Nombre</label>
+                                <label type="text" class="form-control" >{{alumno.apoderado.nombre}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Apellidos</label>
+                                <label type="text" class="form-control" >{{alumno.apoderado.apellidos}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Parentesco</label>
+                                <label type="text" class="form-control" >{{alumno.apoderado.parentesco}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Dirección</label>
+                                <label type="text" class="form-control" >{{alumno.apoderado.direccion}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Ocupación</label>
+                                <label type="text" class="form-control" >{{alumno.apoderado.ocupacion}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Telefono</label>
+                                <label type="text" class="form-control" >{{alumno.apoderado.telefono}}</label>
+                                
+                            </div>
+
+                            <hr class="my-4">
+                
+                            <h4 class="mb-3">Padre</h4>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Participa en la crianza</label>
+                                <label type="text" class="form-control" >{{alumno.padre.participacion}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Nombre</label>
+                                <label type="text" class="form-control" >{{alumno.padre.nombre}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Apellidos</label>
+                                <label type="text" class="form-control" >{{alumno.padre.apellidos}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Nombre</label>
+                                <label type="text" class="form-control" >{{alumno.padre.rut}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Rut</label>
+                                <label type="text" class="form-control" >{{alumno.padre.rut}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Estado civil</label>
+                                <label type="text" class="form-control" >{{alumno.padre.estadoCivil}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Dirección</label>
+                                <label type="text" class="form-control" >{{alumno.padre.direccion}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Ocupación</label>
+                                <label type="text" class="form-control" >{{alumno.padre.ocupacion}}</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label  class="form-label">Lugar de trabajo</label>
+                                <label type="text" class="form-control" >{{alumno.padre.lugarTrabajo}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Nivel</label>
+                                <label type="text" class="form-control" >{{alumno.padre.nivel}}</label>
+                            </div>
+
+                         
+                            <div class="col-sm-6">
+                                <label  class="form-label">Profesión</label>
+                                <label type="text" class="form-control" >{{alumno.padre.profesion}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Fecha nacimiento</label>
+                                <label type="text" class="form-control" >{{alumno.padre.fechaNacimiento}}</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label  class="form-label">Telefono</label>
+                                <label type="text" class="form-control" >{{alumno.padre.telefono}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Email</label>
+                                <label type="text" class="form-control" >{{alumno.padre.email}}</label>
+                            </div>
+
+
+                            <hr class="my-4">
+                
+                            <h4 class="mb-3">Datos de la Mamá</h4>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Participa en la crianza</label>
+                                <label type="text" class="form-control" >{{alumno.madre.participacion}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Nombre</label>
+                                <label type="text" class="form-control" >{{alumno.madre.nombre}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Apellidos</label>
+                                <label type="text" class="form-control" >{{alumno.madre.apellidos}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Nombre</label>
+                                <label type="text" class="form-control" >{{alumno.madre.rut}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Rut</label>
+                                <label type="text" class="form-control" >{{alumno.madre.rut}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Estado civil</label>
+                                <label type="text" class="form-control" >{{alumno.madre.estadoCivil}}</label>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label  class="form-label">Dirección</label>
+                                <label type="text" class="form-control" >{{alumno.madre.direccion}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Ocupación</label>
+                                <label type="text" class="form-control" >{{alumno.madre.ocupacion}}</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label  class="form-label">Lugar de trabajo</label>
+                                <label type="text" class="form-control" >{{alumno.madre.lugarTrabajo}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Nivel</label>
+                                <label type="text" class="form-control" >{{alumno.madre.nivel}}</label>
+                            </div>
+
+                         
+                            <div class="col-sm-6">
+                                <label  class="form-label">Profesión</label>
+                                <label type="text" class="form-control" >{{alumno.madre.profesion}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Fecha nacimiento</label>
+                                <label type="text" class="form-control" >{{alumno.madre.fechaNacimiento}}</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label  class="form-label">Telefono</label>
+                                <label type="text" class="form-control" >{{alumno.madre.telefono}}</label>
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label >Email</label>
+                                <label type="text" class="form-control" >{{alumno.madre.email}}</label>
+                            </div>
+                           
+                
+                          
+                
+                      
+                           
+                          <hr class="my-4">
+                
+                          <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+                        </form>
+                      </div>
+                    </div>
+                  </main>
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

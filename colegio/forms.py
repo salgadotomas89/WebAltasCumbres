@@ -1,8 +1,10 @@
 from dataclasses import fields
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from pymysql import NULL
-
-from colegio.models import Alumno, Asistente, Comunicado, Guia,Book, Noticia, Evento, Profesor
+from colegio import models
+from colegio.models import Alumno, Apoderado, Asistente, Comunicado, Guia,Book, Noticia, Madre ,Evento, Padre, Profesor
 
 
 class ContactForm(forms.Form):
@@ -11,6 +13,18 @@ class ContactForm(forms.Form):
     email = forms.EmailField(max_length=150)
     mensaje = forms.CharField(widget=forms.Textarea, max_length=2000)
 
+
+class UserRegisterForm(UserCreationForm):
+	email = forms.EmailField()
+	password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+	password2 = forms.CharField(label='Confirma Contraseña', widget=forms.PasswordInput)
+
+	class Meta:
+		model = User
+		fields = ['username', 'email', 'password1', 'password2']
+		help_texts = {k:"" for k in fields }
+
+    
 class FormProfesor(forms.ModelForm):
     #password = forms.CharField(widget=forms.PasswordInput)
 
@@ -46,9 +60,29 @@ class Curso(forms.ModelForm):
         model = Guia
         fields = '__all__'
 
+class FormApoderado(forms.ModelForm):
+    class Meta:
+        model = Apoderado
+        fields = '__all__'
+
 class FormAlumno(forms.ModelForm):
     class Meta:
         model = Alumno
+        fields = '__all__'
+
+class FormPadre(forms.ModelForm):
+    class Meta:
+        model = Padre
+        fields = '__all__'
+
+class FormTutor(forms.ModelForm):
+    class Meta:
+        model = models.Tutor
+        fields = '__all__'
+
+class FormMadre(forms.ModelForm):
+    class Meta:
+        model = Madre
         fields = '__all__'
 
 class FormNoticia(forms.ModelForm):

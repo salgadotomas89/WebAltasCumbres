@@ -19,6 +19,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -142,6 +143,7 @@ MESSAGE_TAGS = {
         messages.ERROR: 'alert-danger',
  }
 
-
+LOGIN_REDIRECT_URL = 'inicio'
+LOGIN_URL = 'login'
 
 

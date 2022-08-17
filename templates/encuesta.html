@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+        <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1>Encuesta apoderados</h1>
+
+                <p>Antes de comenzar a llenar los datos, asegurese de contar con una conexión estable a internet y
+                    tener los siguientes datos:</p>
+                
+
+                <div class="container px-5">
+                    <img src="{% static 'images/datos1.png' %}"  class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
+
+                    <img src="{% static 'images/datos.png' %}"  class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
+                </div>
+
+                <a href="{% url 'register' %}"><button type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">Comenzar encuesta</button>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

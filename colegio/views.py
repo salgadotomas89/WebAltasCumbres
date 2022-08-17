@@ -1,19 +1,26 @@
+from email import message
 import mimetypes
 import os
+import re
 from django.utils.dateparse import parse_date 
 from django.template.loader import render_to_string
+from django.contrib.auth.forms import UserCreationForm
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_protect
 from urllib.request import Request
+from django.contrib.auth import authenticate
+from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, FileResponse
 from django.shortcuts import render, redirect
-from .forms import ContactForm, Curso, FormAlumno, FormLibro, FormNoticia, FormEvento, FormProfesor, FormGuia, FormComunicado
+from .forms import ContactForm, Curso, FormAlumno, FormApoderado, FormLibro, FormMadre, FormNoticia, FormEvento, FormPadre, FormProfesor, FormGuia, FormComunicado, FormTutor, UserRegisterForm
 from datetime import datetime
 from json import dumps
 from django.contrib import messages #import messages
 from django.http import JsonResponse
-from .models import Book, Alumno, ArchivosComunicado, Guia, ImagesNoticia, Noticia, Evento, Profesor, Curso, Comunicado
+from .models import Apoderado, Book, Alumno, ArchivosComunicado, Guia, ImagesNoticia, Madre, Noticia, Evento, Padre, Profesor, Curso, Comunicado, Tutor
 
 
 #funciones relacionadas con los archivos estaticos como reglamento
@@ -137,6 +144,8 @@ def mision(request):
 
 def vision(request):
     return render(request, 'vision.html')
+
+
 
 def libros(request):
     libros = Book.objects.all
@@ -301,8 +310,7 @@ def add_comunicado(request):
     if request.method == 'POST':
         form_noticia = FormComunicado(request.POST, request.FILES)
         archivos = request.FILES.getlist('files')
-        print('hello')
-        print(archivos)
+        
 
         if form_noticia.is_valid():
             noticia = form_noticia.save(commit=False)
@@ -362,15 +370,6 @@ def destroy_alumno(request, id):
 
 
 
-
-def add_alumno(request):
-    cursos = Curso.objects.all
-
-    return render(request, 'alumno.html',{'cursos': cursos} )
-
-
-
-
 def calcularEdad(alumno):
         #fecha de hoy
         edad = 0
@@ -400,30 +399,222 @@ def calcularEdad(alumno):
 
         return edad
 
+@login_required
+def inicio(request):
+    current_user = request.user
+    respuesta = 'no'
+    alumnos = None
+    
+    if Apoderado.objects.filter(user_id=current_user).exists():
+        apoderado = Apoderado.objects.get(user_id=current_user)
+        # resto de acciones cuando el pedido existe
+        respuesta = 'si'
+
+        print(apoderado.id)
+
+        if Alumno.objects.filter(apoderado_id=apoderado).exists():
+            print(Alumno.objects.filter(apoderado_id=3).__sizeof__)
+            alumnos = Alumno.objects.filter(apoderado_id=apoderado)
+            print(alumnos.count)
+            if len(alumnos) > 1 :
+                alumnos = Alumno.objects.filter(apoderado_id=apoderado)
+
+                # resto de acciones cuando el pedido existe
+            else:
+                print('ke')
+                print(Alumno.objects.filter(apoderado_id=3).exists())
+                alumnos = Alumno.objects.get(apoderado_id=apoderado)
+        else:
+            #no hay alumnos
+            print('hola')
+            pass
+        
+    else:
+        # acciones cuando el pedido no existe, redireccionas, envias un mensaje o cualquier opcion que consideres necesario para tratar este caso
+        pass
+    
+    
+    return render(request, 'inicio.html', {'username': current_user, 'apoderado': respuesta, 'alumnos': alumnos})
+
+@csrf_exempt 
+def registro(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+
+        nombreUsuario = request.POST.get('username')
+        passw = request.POST.get('password')
+
+
+        if form.is_valid():
+            user = form.save()
+
+            user = authenticate(username=nombreUsuario, password=passw)
+
+            #message.success(request,'se ha creado exitosamente')
+            return redirect('inicio')
+    else:
+        form = UserRegisterForm()
+
+    context = {'form': form}
+    return render(request, 'registro.html', context)
+
+
+def apoderado(request):
+    current_user = request.user
+
+    if request.method == "POST":
+        form = FormApoderado(request.POST)
+
+        if form.is_valid():
+
+            your_object = form.save(commit=False)
+            your_object.user = current_user
+            your_object.save()
+
+            return redirect("inicio")
+
+        else:
+            print(form.errors)
+
+
+    return render(request, 'apoderado.html')
+
 def savealumno(request):
+    #usuario logeado
+    current_user = request.user
+    apoderado = Apoderado.objects.get(user_id=current_user.id)
+
+
     # request should be ajax and method should be POST.
-    if request.is_ajax and request.method == "POST":
+    if request.method == "POST":
         # get the form data
         form = FormAlumno(request.POST)
-        idCurso = request.POST.get('curso')
+        idCurso = request.POST.get("curso")
         curso = Curso.objects.get(id=idCurso)
-        form.curso = curso
-        if form.is_valid():
-            # save the data and after fetch the object in instance
-            alumno = form.save()
-            response = {
-                'msg':'Datos guardados exitosamente' # response message
-            }
-            return JsonResponse(response)
-        else:
-            print(form.errors)   
         
-    return render(request, 'alumno.html')
+        if form.is_valid():
+            your_object = form.save(commit=False)
+            your_object.curso = curso
+            your_object.apoderado = apoderado
+            alumno = your_object.save()
+
+            # save the data and after fetch the object in instance
+            
+
+            return redirect('inicio')
+
+        else:
+            print('error ingresando datos')
+            print(form.errors) 
+
+    cursos = Curso.objects.all
+    return render(request, 'alumno.html',{'cursos': cursos})
+
+
+def encuesta(request):
+    return render(request, 'encuesta.html')
+
+
+def selectTutor(request, idTutor, idAlumno):
+    alumno = Alumno.objects.get(id = idAlumno)
+    print(alumno.nombre)
+    tutor = Tutor.objects.get(id=idTutor)
+    alumno.tutor = tutor
+    alumno.save()
+
+    return redirect('inicio')
+
+
+def tutor(request, id):
+    current_user = request.user
+    alumno = Alumno.objects.get(id = id)
+
+    if request.method == 'POST':
+        
+        form = FormTutor(request.POST)
+        if form.is_valid():
+            idAlumno = request.POST.get("idAlumno")
+
+            alumno = Alumno.objects.get(id = idAlumno)
+
+
+            tutor = form.save()
+            alumno.tutor = tutor
+            alumno.save()
+            return redirect('inicio')
+    
+    return render(request, 'tutor.html', {'idAlumno': id})
+
+#aqui llegamos despues de registrar al alumno, con su id
+
+def selectPadre(request, idPadre, idAlumno):
+    alumno = Alumno.objects.get(id = idAlumno)
+    print(alumno.nombre)
+    padre = Padre.objects.get(id=idPadre)
+    alumno.padre = padre
+    alumno.save()
+
+    return redirect('inicio')
+
+def padre(request, id):
+    current_user = request.user
+    alumno = Alumno.objects.get(id = id)
+
+    if request.method == 'POST':
+        
+        form = FormPadre(request.POST)
+        if form.is_valid():
+            idAlumno = request.POST.get("idAlumno")
+            alumno = Alumno.objects.get(id = idAlumno)
+            padre = form.save()
+            alumno.padre = padre
+            alumno.save()
+            return redirect('inicio')
+    
+    return render(request, 'padre.html', {'idAlumno': id})
+
+def selectMadre(request, idMadre, idAlumno):
+    alumno = Alumno.objects.get(id = idAlumno)
+    print(alumno.nombre)
+    madre = Madre.objects.get(id=idMadre)
+    alumno.madre = madre
+    alumno.save()
+    print('hooa')
+
+    return redirect('inicio')
+
+def madre(request, id):
+    current_user = request.user
+    alumno = Alumno.objects.get(id = id)
+
+    if request.method == 'POST':
+        
+        form = FormMadre(request.POST)
+        if form.is_valid():
+            idAlumno = request.POST.get("idAlumno")
+            alumno = Alumno.objects.get(id = idAlumno)
+            madre = form.save()
+            alumno.madre = madre
+            alumno.save()
+            return redirect('inicio')
+        else:
+            print(form.errors)
+    
+    return render(request, 'madre.html', {'idAlumno': id})
+
+
 
 
 def cursos(request):
     return render(request, 'cursos.html')
 
+def ranking(request):
+
+    return render(request, 'ranking.html')
+
+def torneos(request):
+
+    return render(request, 'torneos.html')
 
 def galeria(request):
 
@@ -452,3 +643,21 @@ def contacto(request):
         return HttpResponse("Gracias por contactarnos")
 
     return render(request, 'contacto.html')
+
+
+def cursos(request):
+    cursos = Curso.objects.all()
+    return render(request, 'cursos.html', {'cursos': cursos})
+
+
+def infoAlumnos(request, id):
+    print('id curso')
+    print(id)
+    alumnos = Alumno.objects.filter(curso_id = id)
+
+    return render(request, 'info-alumnos.html', {'alumnos': alumnos})
+
+def info(request, id):
+    alumno = Alumno.objects.get(id = id)
+
+    return render(request, 'alumno-info.html', {'alumno': alumno})

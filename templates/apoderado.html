@@ -1,0 +1,63 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+          <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+              <h1>Antecedentes del apoderado</h1>
+                <form id="formAlumno" class="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+               
+
+                    <div class="form-group">
+                        <label for="rutpadre">Rut</label>
+                        <input name="rut" type="text" class="form-control" id="rutpadre" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombrepadre">Nombre</label>
+                        <input name="nombre" type="text" class="form-control" id="nombrepadre" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apellidospadre">Apellidos</label>
+                        <input name="apellidos" type="text" class="form-control" id="apellidospadre" >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="estadopadre">Parentesco con el alumno</label>
+                        <input name="parentesco" type="text" class="form-control" id="estadopadre" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="direccionpadre">Dirección</label>
+                        <input name="direccion" type="text" class="form-control" id="direccionpadre" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ocupacion">Ocupación</label>
+                        <input name="ocupacion" type="text" class="form-control" id="ocupacion" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Telefono</label>
+                        <input name="telefono" type="text" class="form-control" id="telefono" >
+                    </div>
+                   
+
+                     <button type="submit" class="btn btn-primary mb-4 mt-4">Guardar</button>
+                </form>
+                <div id="output">
+                </div>
+        </div>
+    </div>
+
+
+     
+
+{% endblock %}

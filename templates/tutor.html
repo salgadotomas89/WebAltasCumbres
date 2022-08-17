@@ -1,0 +1,49 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+          <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+              <h1>Antecedentes tutor económico</h1>
+                <form  class="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+            
+                    <div class="form-group">
+                        <label for="rut">Rut</label>
+                        <input name="rut" type="text" class="form-control" id="rut" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input name="nombre" type="text" class="form-control" id="nombre" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apellidos">Apellidos</label>
+                        <input name="apellidos" type="text" class="form-control" id="apellidos" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trabajo">Lugar de trabajo</label>
+                        <input name="trabajo" type="text" class="form-control" id="trabajo" >
+                    </div>
+
+                    <input type="hidden" id="idAlumno" name="idAlumno" value="{{idAlumno}}">
+
+
+
+                    <button type="submit" class="btn btn-primary mb-4 mt-4">Guardar -></button>
+                </form>
+                <div id="output">
+                </div>
+        </div>
+    </div>
+
+
+    
+
+{% endblock %}
