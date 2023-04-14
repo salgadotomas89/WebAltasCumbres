@@ -1,6 +1,14 @@
 from email import message
+from itertools import chain
+import json
 import mimetypes
+from operator import attrgetter
 import os
+import random
+from django.core import serializers
+from django.views.generic import TemplateView, ListView
+from django.db.models import Q # new
+
 import re
 from django.utils.dateparse import parse_date 
 from django.template.loader import render_to_string
@@ -15,15 +23,25 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, FileResponse
 from django.shortcuts import render, redirect
-from .forms import ContactForm, Curso, FormAlumno, FormApoderado, FormLibro, FormMadre, FormNoticia, FormEvento, FormPadre, FormProfesor, FormGuia, FormComunicado, FormTutor, UserRegisterForm
+from .forms import ContactForm, FormBoletin, FormTenista,Curso,FormEvaluacion,FormInscripcion, FormAlumno, FormAmigo, FormApoderado, FormLibro, FormMadre, FormNoticia, FormEvento, FormPadre, FormProfesor, FormGuia, FormComunicado, FormTutor, UserRegisterForm
 from datetime import datetime
 from json import dumps
 from django.contrib import messages #import messages
 from django.http import JsonResponse
-from .models import Apoderado, Book, Alumno, ArchivosComunicado, Guia, ImagesNoticia, Madre, Noticia, Evento, Padre, Profesor, Curso, Comunicado, Tutor
+from .models import Amigo,Tenista, Apoderado, Evaluacion, Book, Alumno, ArchivosComunicado, Guia, ImagesNoticia, Madre, Noticia, Evento, Padre, Profesor, Curso, Comunicado, Tutor, Taller, Inscripcion
 
 
 #funciones relacionadas con los archivos estaticos como reglamento
+def archReligion(request):
+    filepath = os.path.join('static', 'CircularReligion.pdf')
+    return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
+
+
+def fichaMatricula(request):
+    filepath = os.path.join('static', 'fichaMatricula.pdf')
+    return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
+
+
 def show_pdf(request):
     filepath = os.path.join('static', 'PEI.pdf')
     return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
@@ -75,6 +93,26 @@ def index(request):
 
     return render(request, "index.html", context)
 
+def page_not_found_view(request, exception):
+    return render(request, '404.html', status=404)
+
+
+def galeria(request):
+
+    noticias = Noticia.objects.all()
+    noticias_ordenadas = noticias.order_by('-date')
+    noticias_galeria = []
+
+    for n in noticias_ordenadas:
+        n.date = dame_formato(n.date)  # actualizo su formato de fecha
+        if n.galeria == True:
+            noticias_galeria.append(n)
+
+    fotos = ImagesNoticia.objects.all()
+    
+    return render(request, 'fotos.html', {'noticias':noticias_galeria, 'fotos':fotos})    
+
+
 
 #cambia el formato de la fecha date
 def dame_formato(date):
@@ -121,6 +159,10 @@ def destroy_guia(request, id):
     
     return redirect("/pedidos")
 
+def destroyAlumnoTaller(request, id):
+
+    return redirect("/talleres")
+
 def estado_guia(request, id):
     guia = Guia.objects.get(id=id)
     guia.estado = "Ok"
@@ -133,6 +175,25 @@ def download_guia(request, id):
     filepath = os.path.join(settings.MEDIA_ROOT, guia.documento.name)
     return FileResponse(open(filepath, 'rb'), content_type='application/force-download')
 
+def descargarListaMateriales(request, curso):
+    msg = 'materials'
+    msg += str(curso)
+    msg += '.pdf'
+    filepath = os.path.join('static', msg)
+
+
+    if os.path.isfile(filepath):
+        print("existe")
+        return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
+    else:
+        print('no existe')
+        return redirect("index")
+
+def descargarCalendario(request, id):
+
+    guia = Evaluacion.objects.get(id=id)
+    filepath = os.path.join(settings.MEDIA_ROOT, guia.archivo.name)
+    return FileResponse(open(filepath, 'rb'), content_type='application/force-download')
 
 def directiva(request):
     return render(request, 'directiva.html')
@@ -144,7 +205,6 @@ def mision(request):
 
 def vision(request):
     return render(request, 'vision.html')
-
 
 
 def libros(request):
@@ -256,20 +316,61 @@ def noticias(request):
     context = {"noticias": Noticia.objects.all()}
     return render(request, 'noticias.html', context)
 
+
+def talleres(request):
+    talleres = Taller.objects.all()#traigo todos los talleres
+    inscripcion = True
+
+    if request.method == 'POST':
+        form = FormInscripcion(request.POST)
+        if form.is_valid():
+            form.save()
+            inscripcion = False
+        else:
+            print('formulario no valido')
+    else:
+        print('hola')
+
+    context = {"talleres": talleres, "inscripcion": inscripcion}
+
+    return render(request, 'talleres.html', context )
+
 def comunicados(request):
     archivos = ArchivosComunicado.objects.all()
-    comunicados = Comunicado.objects.all()
+    comunicados = Comunicado.objects.order_by('id').all().reverse()
+
+    
     return render(request, 'comunicados.html', {'comunicados':comunicados, 'archivos':archivos})
 
 def valores(request):
     return render(request, 'valores.html')
 
-
-    
-
-
 def pie(request):
     return render(request, 'pie.html')
+
+
+def evaluaciones(request):
+    evaluaciones = Evaluacion.objects.all()
+
+    context = {"evaluaciones": evaluaciones}
+    
+    return render(request, "evaluaciones.html", context)
+
+def addEvaluacion(request):
+    if request.method == 'POST':
+        form = FormEvaluacion(request.POST, request.FILES)
+        archivos = request.FILES.getlist('file')
+
+        if form.is_valid():
+            form.save()
+
+    return render(request, 'form-evaluacion.html')
+
+
+
+def inscripciones(request):
+
+    return render(request, 'inscripciones.html')
 
 
 def blog(request, idnotice):
@@ -304,6 +405,17 @@ def noticia(request):
             print(form_noticia.errors)
 
     return render(request, 'noticia.html')
+
+
+def addBoletin(request):
+    if request.method == 'POST':
+
+        form = FormBoletin(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+
+    return render(request, 'boletin.html')
 
 
 def add_comunicado(request):
@@ -344,8 +456,6 @@ def destroy(request, id):
     employee = Evento.objects.get(id=id)
     employee.delete()
     return redirect("/eventos")
-
-
 
 def destroy_noticia(request, id):
     news = Noticia.objects.get(id=id)
@@ -525,6 +635,23 @@ def selectTutor(request, idTutor, idAlumno):
     return redirect('inicio')
 
 
+
+
+def resultadoTalleres(request, id):
+    alumnos = Inscripcion.objects.filter(talleres = id)
+    taller = Taller.objects.get(id = id)
+    
+    total  = len(alumnos)
+
+
+    print(taller)
+    print(alumnos)
+
+    context = {'alumnos': alumnos, 'taller': taller, 'total':total}
+
+    return render(request, 'resultados-taller.html', context)
+
+
 def tutor(request, id):
     current_user = request.user
     alumno = Alumno.objects.get(id = id)
@@ -609,26 +736,40 @@ def cursos(request):
     return render(request, 'cursos.html')
 
 def ranking(request):
+    hola = Tenista.objects.all()
 
-    return render(request, 'ranking.html')
+
+    #ordenar a los jugadores segun puntaje
+    jugadores = sorted(hola, key=attrgetter('puntaje'), reverse=True)
+    i=1
+    for jugador in jugadores:
+        jugador.ranking = i
+        jugador.save()
+        i=i+1
+
+    context = {'jugadores':jugadores}
+
+
+    return render(request, 'ranking.html', context)
+
+
+def addTenista(request):
+    if request.method == 'POST':
+
+        form = FormTenista(request.POST)
+
+        if form.is_valid():
+            form.save()
+            
+        
+
+    return render(request, 'form-tenista.html')
+
 
 def torneos(request):
 
     return render(request, 'torneos.html')
 
-def galeria(request):
-
-    noticias = Noticia.objects.all()
-
-    noticias_galeria = []
-
-    for n in noticias:
-        if n.galeria == True:
-            noticias_galeria.append(n)
-
-    fotos = ImagesNoticia.objects.all()
-    
-    return render(request, 'galeria.html', {'noticias':noticias_galeria, 'fotos':fotos})    
 
 
 def contacto(request):
@@ -643,6 +784,7 @@ def contacto(request):
         return HttpResponse("Gracias por contactarnos")
 
     return render(request, 'contacto.html')
+
 
 
 def cursos(request):
@@ -661,3 +803,129 @@ def info(request, id):
     alumno = Alumno.objects.get(id = id)
 
     return render(request, 'alumno-info.html', {'alumno': alumno})
+
+
+
+
+
+def amigoSecreto(request):
+    
+    if request.method == 'POST':
+        form = FormAmigo(request.POST)
+        if form.is_valid():
+            form.save()
+            mensaje = "registrado exitosamente"
+        else:
+            mensaje = 'hubo un error, porfavor intertarlo nuevamente!!'
+        
+        return render(request, 'amigo.html',{
+            "mensaje": mensaje
+        })
+            
+    else:
+        return render(request, 'amigo.html')
+
+class SearchResultsView(ListView):
+    model = Amigo
+    template_name = "resultados-amigo.html"
+
+    def get_queryset(self):  # new
+        query = self.request.GET.get("q")
+        ipActual = verIp(self.request, query)
+        object_list = Amigo.objects.filter(
+            Q(nombre__icontains=query) 
+        )
+
+        if object_list.get().ip:
+
+            if Amigo.objects.filter(ip=ipActual):
+            
+                if object_list.get().ip == Amigo.objects.filter(ip=ipActual).get().ip:
+                    print('puede ver los datos 1')
+                    
+                else:
+                    print('no puede ver los datos 1')
+                    object_list = None
+            else:
+                print(' no puedes ver esos datos')
+                
+
+        else:#no tiene ip
+
+            #veo si mi ip no ha consultado antes en la base de datos
+            if Amigo.objects.filter(ip=ipActual):
+
+                if object_list.get().nombre == Amigo.objects.filter(ip=ipActual).get().nombre:
+                    print('puede ver los datos 2')
+                    Amigo.objects.filter(nombre=query).update(visto=True)
+                    Amigo.objects.filter(nombre=query).update(ip=ipActual)
+
+                else:
+                    print('no puede ver los datos 2')
+                    object_list = None
+                    
+            else:
+
+                print ('registrando')
+                Amigo.objects.filter(nombre=query).update(visto=True)
+                Amigo.objects.filter(nombre=query).update(ip=ipActual)
+
+
+        return object_list
+
+
+def verIp(request, nombre):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+
+    
+    
+    return ip
+    
+
+    
+
+
+def amigoResultado(request):
+
+    return render(request, 'resultados-amigo.html')
+
+def realizarSorteo():
+    amigos = Amigo.objects.all()#traigo a todos los participantes
+    friends = []
+
+    for amigo in amigos:
+        if amigo.nombreAmigo is None:
+            friends.append(amigo)
+
+    cantidad = int(len(amigos))#cantidad de participantes
+
+    if cantidad % 2 == 0:
+        for i in range(cantidad):
+            primerSeleccionado = amigos[i]
+            #si seleccionado no tiene amigo secreto
+
+
+
+            if(primerSeleccionado.nombreAmigo is None):
+
+                segundoSeleccionado = random.choice(friends)
+
+                
+                while primerSeleccionado == segundoSeleccionado:
+                    segundoSeleccionado = random.choice(friends)
+
+                
+                friends.remove(segundoSeleccionado)
+
+                amigos.filter(nombre=primerSeleccionado.nombre).update(nombreAmigo=segundoSeleccionado.nombre+' '+segundoSeleccionado.apellido)
+
+    else:
+        print('falta un participante para el juego de amigo secreto')
+
+
+
+   

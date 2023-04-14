@@ -14,25 +14,21 @@
                 <table class="table">
                     <thead>
                         <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido paterno</th>
-                        <th scope="col">Apellido materno</th>
-                        <th scope="col">Acciones</th>
-                        
-                        
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido paterno</th>
+                            <th scope="col">Apellido materno</th>
+                            <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for alumno in alumnos %}
                         <tr>
-                            
                             <td>{{alumno.nombre}}</td>
                             <td>{{alumno.paterno}}</td>
                             <td>{{alumno.materno}}</td>
                             <td>
                                 <a href="/info/alumno/{{ alumno.id }}" role="button" class="btn btn-danger">Información</a>
                             </td>
-                            
                         </tr>
                         {% endfor%}
                     </tbody>

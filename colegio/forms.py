@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from pymysql import NULL
 from colegio import models
-from colegio.models import Alumno, Apoderado, Asistente, Comunicado, Guia,Book, Noticia, Madre ,Evento, Padre, Profesor
+from colegio.models import Alumno , Boletin, Evaluacion, Amigo, Apoderado, Asistente, Comunicado, Guia,Book, Noticia, Madre ,Evento, Padre, Profesor, Taller, Inscripcion, Tenista
 
 
 class ContactForm(forms.Form):
@@ -108,7 +108,34 @@ class ArchivosFormComunicado(FormComunicado): #extending form
         fields = FormComunicado.Meta.fields + ['archivos',]
 
 
-    
+class FormAmigo(forms.ModelForm):
+    class Meta:
+        model = Amigo
+        fields = '__all__'
 
+class FormTaller(forms.ModelForm):
+    class Meta:
+        model = Taller
+        fields = '__all__'
 
+class FormInscripcion(forms.ModelForm):
+    class Meta:
+        model = Inscripcion
+        fields = '__all__'
+
+class FormEvaluacion(forms.ModelForm):
+    class Meta:
+        model = Evaluacion
+        fields = '__all__'
         
+
+class FormTenista(forms.ModelForm):
+    class Meta:
+        model = Tenista
+        fields = ["nombre", "curso"]
+
+
+class FormBoletin(forms.ModelForm):
+    class Meta:
+        model = Boletin
+        fields = ["fecha", "archivo", "autor"]

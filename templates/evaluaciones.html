@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+        <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1>Calendario evaluaciones mes de Abril</h1>
+                
+
+                <div class="container px-4 py-5" id="featured-3">
+                    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                      {% for evaluacion in evaluaciones %}
+                      <div class="feature col">
+                        
+                            <h2> {{evaluacion.curso}}</h2>
+                            <p>A continuación puede descargar el calendario correspondiente a {{ evaluacion.curso }}.</p>
+                            <a href="/download/calendario/{{ evaluacion.id }}" role="button" class="btn btn-success">Descargar</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                
+                
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

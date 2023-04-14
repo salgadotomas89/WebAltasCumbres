@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+          <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+              <h1>Nuevo evento</h1>
+                <form class="" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                     
+
+                        <div class="form-group">
+                           <label for="date" class="col-sm-1 col-form-label">Fecha</label>
+                            <div class="col-sm-4">
+                                <div class="input-group date" id="datepicker">
+                                    <input name="fecha" type="text" class="form-control">
+                                    <span class="input-group-append">
+                                        <span class="input-group-text bg-white">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
+    
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">Archivo pdf</label>
+                                <input name="archivo" type="file" multiple class="form-control-file" id="exampleFormControlFile1">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Autor</label>
+                                <textarea name="autor" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                              </div>
+
+                  <button type="submit" class="btn btn-primary">Subir</button>
+                </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function() {
+            $('#datepicker').datepicker();
+        });
+    </script>
+
+{% endblock %}

@@ -7,6 +7,8 @@
     <meta charset="UTF-8">
     <title>Colegio Altas Cumbres</title>
     {# Load the tag library #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
+
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/pricing/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -64,7 +66,7 @@
         color: white;
       
         font-family: Gelasio;
-        font-size: 18px;
+        font-size: 30px;
       }
       
       .bar_content {
@@ -74,7 +76,7 @@
         transform: translateX(100%); /* Animation start out of the screen */
       
         /* Add the animation */
-        animation: move 30s linear infinite /* infinite make reapeat the animation indefinitely */;
+        animation: move 14s linear infinite /* infinite make reapeat the animation indefinitely */;
       }
       
       /* Create the animation */
@@ -186,7 +188,7 @@
         }
 
         h1, h2, h3, h4, h5, h6 {
-          font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
+          font-family: 'Noto Sans Georgian', sans-serif;
         }
 
         .jumbotron {
@@ -208,33 +210,28 @@
           line-height: 1em;
         }
 
-
-
-
-
     </style>
 </head>
 
 
 <body>
+  <!--
   <div class="bar">
     <span class="bar_content">
-      Bienvenidos al colegio Altas Cumbres siguenos en instagram como : altascum
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-exclamation-diamond-fill" viewBox="0 0 16 16">
+        <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098L9.05.435zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+      </svg> Uniforme escolar: +569-20694957 sra Juanita
     </span>
-  </div>
+  </div>-->
   
 
     <section class="">
-
-      
-      
       <nav class="navbar navbar-expand-lg bg-dark navbar-light py-4">
 
         <div class="container text-white">
           <a class="navbar-brand text-white" href="{% url 'index' %}">
             <img class="img-fluid" src="{% static 'images/logo.png' %}" alt="" height="50" width="40">
               COLEGIO ALTAS CUMBRES
-
           </a>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header01" aria-controls="header01" aria-expanded="false" aria-label="Toggle navigation">
@@ -252,53 +249,108 @@
 
         </div>
       </nav>
-
-      
-
     </section>
-
-
-
-   
-    
-
 
   {% block content %}<!-- default content text (typically empty) -->
 
-      <div >
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img class="d-block w-100" src="..." alt="First slide">
+  <div class="album py-5 bg-warning text-center">
+        <h1 class="display-4 fw-bold"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-megaphone-fill" viewBox="0 0 16 16">
+          <path d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0v-11zm-1 .724c-2.067.95-4.539 1.481-7 1.656v6.237a25.222 25.222 0 0 1 1.088.085c2.053.204 4.038.668 5.912 1.56V3.224zm-8 7.841V4.934c-.68.027-1.399.043-2.008.053A2.02 2.02 0 0 0 0 7v2c0 1.106.896 1.996 1.994 2.009a68.14 68.14 0 0 1 .496.008 64 64 0 0 1 1.51.048zm1.39 1.081c.285.021.569.047.85.078l.253 1.69a1 1 0 0 1-.983 1.187h-.548a1 1 0 0 1-.916-.599l-1.314-2.48a65.81 65.81 0 0 1 1.692.064c.327.017.65.037.966.06z"/>
+        </svg>   Comunicados</h1>
+        
+        <p class="px-5">Queridos apoderados les informamos que toda información oficial la encontrarán en el siguiente link
+        </p>
+        <a href="{% url 'comunicados' %}" class="btn btn-info">
+          comunicados
+        </a>  
+        
+  </div>
+
+
+
+  <div >
+        <section class="jumbotron text-center ">
+            <div class="container">
+              <h3 class="animate-charcter">Altas Cumbres de San Clemente</h3>
             </div>
-            <div class="carousel-item">
-              <img class="d-block w-100" src="..." alt="Second slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block w-100" src="..." alt="Third slide">
+        </section>
+      </div>
+
+      
+
+<!--
+      <div  class=" px-4 py-5 text-center bg-white " >
+        <div  class="py-5">
+            <h1 class="display-4 fw-bold mb-4" >Proceso matriculas</h1>
+
+            <ul style="list-style: none;" class="mb-4" >
+              <li><h4 class="text-danger"> <i class="bi bi-person-fill"></i> Alumnos Nuevos  ( 1° a 8° Básico ) : Viernes 16 de Diciembre-
+                Horario  9 : 30 a 12 :30 hrs.</h4></li>
+
+                <li><h4 class="text-danger"><i class="bi bi-person-fill"></i> Alumnos Antiguos ( 1° a 8 ° Básico ):Lunes 19 de Diciembre 
+                  Horario 10 :00 a 13 :00 hrs y 15 :00 a 17 :00 hrs.</h4></li>
+            </ul>
+    
+            <h4 >
+              Sr apoderado traer el certificado de nacimiento <i class="bi bi-file-earmark-text"></i> junto a los documentos que aparecen a continuación <i class="bi bi-arrow-down-square-fill"></i> .
+            
+            </h4>
+        </div>
+        
+
+        <div class="row">
+          <div class="col-sm-6 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Circular Religión</h5>
+                <p class="card-text">Traer completado con letra clara y legible.</p>
+                <a href="{% url 'archReligion' %}" class="btn btn-primary">
+                  Descargar
+                </a>              </div>
             </div>
           </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
+          <div class="col-sm-6 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Ficha matricula</h5>
+                <p class="card-text">Traer completado con letra clara y legible.</p>
+                <a href="{% url 'fichaMatricula' %}" class="btn btn-primary">
+                  Descargar
+                </a>
+              </div>
+            </div>
+          </div>
+          
         </div>
       </div>
+    -->
+
+    <div class=" px-4 py-5 text-center bg-light"  >
+      <h2 class="display-4 fw-bold">Encuentro Ex-alumnos</h2>
+      <p class="fs-5 mb-4">Es un placer para nosotros invitarlos a un maravilloso compartir juntos a nuestros estudiantes de 8° Año Básico. Será una oportunidad para que puedan compartir sus experiencias y ayudar a inspirar a nuestros estudiantes en su futuro</p>
+      <p class="fs-5 mb-4">Día: Miércoles 19 de Abril año 2023.
+        Horario: 16:00 hrs.
+        Lugar: Colegio Altas Cumbres.</p>
+      <p class="fs-5 mb-4">Si quieres ser participe activo de esta actividad, inscríbete en el siguiente link: <a href="https://docs.google.com/forms/d/e/1FAIpQLSfZTborSqt-CK5RU43Kzdqp6s6ZDZ77c_ml-2PW75kCxxG47Q/viewform?usp=sf_link" class="link-primary">formulario</a>
+  
+    </div>
+
+    <div class=" px-4 py-5 text-center" style="background-color: rgba(162, 217, 206      )" >
+          <h2 class="display-4 fw-bold">Calendario de evaluaciones</h2>
+          <p class="fs-5 mb-4">Este documento les permitirá conocer las fechas de las evaluaciones, su tipo y el contenido que será evaluado. De esta manera, podrán planificar y apoyar el estudio de sus hijos de manera más efectiva.</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <a href="{% url 'evaluaciones' %}"><button type="button" class="btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">ver calendario</button></a>
+      </div>
+    </div>
+      
+
+    
 
       <div id="covid" class=" px-4 py-5 text-center">
                 <div  class="py-5">
-                    <h1 class="display-4 fw-bold foo  foo-1">Medidas Covid19</h1>
+                    <h1 class="display-4 fw-bold">Medidas Covid19</h1>
 
-                    <p class="foo  foo-2 covidm">En el colegio hemos implementado una serie de medidas para una vuelta a clases
+                    <p class=" covidm">En el colegio hemos implementado una serie de medidas para una vuelta a clases
                         más segura.</p>
                     <img src="{% static 'images/covid.png' %}" class="img-fluid" height="100" width="100">
                 </div>
@@ -311,7 +363,7 @@
     </div>
 
     <div class="album py-5 bg-light text-center">
-        <h1 class="display-4 fw-bold foo  foo-2">Noticias</h1>
+        <h1 class="display-4 fw-bold">Noticias</h1>
         <div class="container">
             <div class="row" data-masonry='{"percentPosition": true }'>
             {% for noticia in noticias %}
@@ -336,8 +388,7 @@
     
     <div class="bg-dark  py-5 text-center">
       <div class=" container-fluid py-5">
-        <h1 class="foo  foo-1 display-5 fw-bold text-white">Eventos proximos <i class="fa fa-space-shuttle" aria-hidden="true"></i>
-        </h1>
+        <h1 class="display-5 fw-bold text-white">Eventos proximos</h1>
                 <!--<p class="fs-5 mb-4">onsive grid system and powerful JavaScript plugins.</p>-->
 
 
@@ -366,12 +417,11 @@
     </div>
 
      <div class="py-5 bg-light text-center">
-         <div class="foo  foo-1">
-             <h1 class="display-4 fw-bold">Profesores <i class="fa fa-users" aria-hidden="true"></i>
-             </h1>
+         <div class="">
+             <h1 class="display-4 fw-bold">Profesores</h1>
          </div>
-         <div class="foo  foo-2">
-             <p class="fs-5 mb-4">Nuestros profesores de primer ciclo cuentan con evaluación docente.</p>
+         <div class="">
+             <p class="fs-5 mb-4">Nuestros profesores de primer y segundo ciclo cuentan con evaluación docente.</p>
          </div>
          <div class="container py-2">
 
@@ -391,23 +441,22 @@
                 </div>
                 {% endfor %}
              </div>
-
-             <a href="{% url 'profesores' %}"><button type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">Conoce a todos nuestros profesores</button>
-             </a>
+             <a href="{% url 'profesores' %}"><button type="button" class="mt-4 btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">Conoce a todos nuestros profesores</button></a>
         </div>
     </div>
 
     <div id="pie" class=" text-dark px-4 py-5 text-center">
             <div class="py-5">
 
-                <h1 class="foo  foo-1 display-5 fw-bold ">Programa de Integración Escolar <i class="fa fa-heart" aria-hidden="true"></i>                </h1>
+                <h1 class=" display-5 fw-bold ">Programa de Integración Escolar</h1>
                 <div class="col-lg-6 mx-auto">
-                    <p class="foo  foo-2 fs-5 mb-4">
+                    <p class="fs-5 mb-4">
                         El PIE es una estrategia inclusiva del sistema
                         educacional, que tiene el propósito de contribuir al mejoramiento continuo
                         de la calidad de la educación, favoreciendo los aprendizajes en la sala de clases y
                         la participación de todos y cada uno de los estudiantes, especialmente de aquellos que
                         presentan Necesidades Educativas Especiales (NEE)..</p>
+                        <p>correo electronico : pie@altascumbressanclemente.cl</p>
 
 
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
@@ -431,7 +480,7 @@
                 <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
                     <img class="w-100 h-100" src="{% static 'images/primerCiclo.jpg' %}" alt="Card image cap">
                 </div>
-                    <div id="ciclo" class=" mt-2 foo  foo-2">
+                    <div id="ciclo" class=" mt-2 ">
                         <h2 class="hover-underline-animation">Primer Ciclo</h2>
                         <p>Es una etapa muy significativa para los niños, ya que comienza un desarrollo de sus habilidades físicas y cognitivas.</p>
                     </div>
@@ -442,19 +491,14 @@
                 <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
                     <img class="w-100 h-100" src="{% static 'images/social.jpg' %}" alt="Card image cap">
                 </div>
-                <div id="ciclo" class="mt-2 foo  foo-2">
+                <div id="ciclo" class="mt-2 ">
                     <h2 class="hover-underline-animation">Segundo Ciclo</h2>
                     <p>En este periodo nuestros estudiantes desarrollan sus habilidades sociales a través de distintos talleres extra programaticos.</p>
                 </div>
                                           <!--<p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>-->
               </div><!-- /.col-lg-4 -->
-
             </div><!-- /.row -->
-
-
     </div>
-
-
 
 {% endblock %}
 </body>
@@ -512,6 +556,7 @@
           <h6 class="text-uppercase fw-bold mb-4">
             Colegio
           </h6>
+          
           <p>
             <a href="{% url 'directiva' %}" class="text-reset">Directiva</a>
           </p>
@@ -519,10 +564,13 @@
             <a href="{% url 'boletin' %}" class="text-reset">Boletín</a>
           </p>
           <p>
-            <a href="{% url 'mision' %}" class="text-reset">Mision</a>
+            <a href="{% url 'mision' %}" class="text-reset">Misión</a>
           </p>
           <p>
-            <a href="{% url 'vision' %}" class="text-reset">Vision</a>
+            <a href="{% url 'vision' %}" class="text-reset">Visión</a>
+          </p>
+          <p>
+            <a href="{% url 'boletin' %}" class="text-reset">Boletín escolar</a>
           </p>
           <p>
             <a href="{% url 'comunicados' %}" class=" text-primary">Comunicados 
@@ -616,16 +664,7 @@
 
 window.sr = ScrollReveal({ reset: true });
 
-// Custom Settings
-sr.reveal('.foo-1', {
-    origin: 'right',
-    duration: 2000
-});
 
-sr.reveal('.foo-2', {
-  origin: 'right',
-  duration: 3000
-});
 
 
   

@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+    <div class="container text-left">
+          <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+              <h1 >Nueva Tenista</h1>
+                <form class="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+                    <div class="form-group">
+                        <label for="inputAddress">Nombre</label>
+                        <input name="nombre" type="text" class="form-control" id="inputAddress" >
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <select class="form-select" name="curso" aria-label="Default select example">
+                            <option selected>Curso</option>
+                            <option value="Primero">Primero</option>
+                            <option value="Segundo">Segundo</option>
+                            <option value="Tercero">Tercero</option>
+                            <option value="Cuarto">Cuarto</option>
+                            <option value="Quinto">Quinto</option>
+                            <option value="Sexto">Sexto</option>
+                            <option value="Séptimo">Séptimo</option>
+                            <option value="Octavo">Octavo</option>
+                          </select>
+                    </div>
+
+
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+        </div>
+    </div>
+
+
+  
+
+{% endblock %}

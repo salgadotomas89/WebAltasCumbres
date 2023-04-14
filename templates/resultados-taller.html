@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container text-left">
+        <div class="p-5 mb-4 mt-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1>Inscripciones a taller {{taller.nombre}}</h1>
+                <p>total inscritos : {{total}}</p>
+                <a href="/talleres" role="button" class="btn btn-primary">volver a talleres</a>
+
+                <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Curso</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for alumno in alumnos%}
+                      <tr>
+                        <td>{{alumno.alumno}}</td>
+                        <td>{{alumno.curso}}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

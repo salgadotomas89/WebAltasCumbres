@@ -10,11 +10,15 @@ from django.contrib.auth.views import LoginView
 
 urlpatterns = [
     path('torneos', views.torneos),
-    path('ranking', views.ranking),
+    path('ranking', views.ranking, name='ranking'),
     path('info/alumno/<int:id>', views.info),
     path('info/<int:id>', views.infoAlumnos),
     path('madre/<int:id>/', views.madre),
     path('padre/<int:id>/', views.padre),
+    path('amigo', views.amigoSecreto, name='amigo'),
+    path('amigo/resultado', views.amigoResultado, name='resultadoAmigo'),
+    path("search/", views.SearchResultsView.as_view(), name="search_results"),
+    path('inscripciones', views.inscripciones, name='inscripciones'),
     path('tutor/<int:id>/', views.tutor, name='tutor'),
     path('select/madre/<int:idMadre>/<int:idAlumno>', views.selectMadre),
     path('select/padre/<int:idPadre>/<int:idAlumno>', views.selectPadre),
@@ -22,11 +26,11 @@ urlpatterns = [
     path('cursos', views.cursos, name='cursos'),
     path('inicio', views.inicio, name='inicio'),
     path('registro', views.registro, name='register'),
-    path('login', LoginView.as_view(template_name='login.html'), name='login'),
-    path('', views.index, name='index'),
     path('blog/<int:idnotice>', views.blog, name='blog'),
     path('directiva', views.directiva, name="directiva"),
     path('boletin', views.boletin, name="boletin"),
+    path('evaluaciones', views.evaluaciones, name="evaluaciones"),
+    path('add/calendario', views.addEvaluacion, name="calendarioevaluaciones"),
     path('mision', views.mision, name="mision"),
     path('vision', views.vision, name="vision"),
     path('contacto', views.contacto, name="contacto"),
@@ -46,6 +50,10 @@ urlpatterns = [
     path('documentos', views.proyecto, name='documentos'),
     path('convivencia', views.show_rc, name='convivencia'),
     path('reglamentointerno', views.show_rice, name='reglamentointerno'),
+    path('archReligion', views.archReligion, name='archReligion'),
+
+
+    path('fichaMatricula', views.fichaMatricula, name='fichaMatricula'),
     path('evaluacion', views.show_eva, name='evaluacion'),
     path('eventos', views.eventos, name='eventos'),
     path('encuesta', views.encuesta, name='encuesta'),
@@ -58,6 +66,9 @@ urlpatterns = [
     path('delete/comunicado/<int:id>', views.destroy_comunicado),
     path('delete/guia/<int:id>', views.destroy_guia),
     path('download/guia/<int:id>', views.download_guia),
+    path('download/calendario/<int:id>', views.descargarCalendario),
+    path('add/boletin', views.addBoletin, "add-boletin"),
+
     path('estado/guia/<int:id>', views.estado_guia),
     path('delete/profesor/<int:id>', views.destroy_profesor),
     path('delete/alumno/<int:id>', views.destroy_alumno),
@@ -72,10 +83,11 @@ urlpatterns = [
     path('prueba', views.prueba),
     path('comunicados', views.comunicados, name="comunicados"),
     path('sala-biblioteca', views.salaBiblioteca,name="sala-biblioteca" ),
-    path('panel', views.panel)
+    path('panel', views.panel),
+    path('talleres', views.talleres, name="talleres"),
+    path('resultado/taller/<int:id>', views.resultadoTalleres),
+    path('add/tenista', views.addTenista)
 ] 
-
-handler404 = views.page_not_found_view
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

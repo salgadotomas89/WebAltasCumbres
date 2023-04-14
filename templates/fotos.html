@@ -1,0 +1,40 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/fluid-gallery.css'%}">
+
+    <div class="container gallery-container">
+
+    <h1>Fotos Altas Cumbres</h1>
+
+    {% for n in noticias  %}
+        {% if n.noticia != False%}
+            <div class="tz-gallery">
+                <h3 class="text-success mt-4">{{n.titulo}} </h3>
+                <small>{{n.date}}</small>
+                    <div class="row">
+                    {% for f in fotos%}
+                        {% if f.noticia == n%}
+                            <div class="col-sm-4 col-md-2">
+                                <a class="lightbox" href="..{{  f.image.url }}">
+                                    <img class="img-fluid" src="{{  f.image.url }}">
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+<script>
+    baguetteBox.run('.tz-gallery');
+</script>
+
+{% endblock %}

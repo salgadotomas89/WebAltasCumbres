@@ -12,31 +12,26 @@
                 <table class="table">
                     <thead class="thead-dark">
                       <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">Ranking</th>
+                        <th scope="col"> </th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
                         <th scope="col">Puntos</th>
+                        <th scope="col">P.G</th>
+                        <th scope="col">P.P</th>
                       </tr>
                     </thead>
                     <tbody>
+                      {% for jugador in jugadores%}
                       <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
+                        <th scope="row">{{jugador.ranking}}</th>
+                        <th><img src="{% static 'images/bandera.png' %}" class="img-fluid" height="10" width="20"></th>
+
+                        <td>{{jugador.nombre}}</td>
+                        <td>{{jugador.puntaje}}</td>
+                        <td>{{jugador.ganados}}</td>
+                        <td>{{jugador.perdidos}}</td>
                       </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                      </tr>
+                      {% endfor %}
                     </tbody>
                   </table>
                   

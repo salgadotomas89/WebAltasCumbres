@@ -1,0 +1,224 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+  {% if inscripcion %}
+
+    <div class="container text-center">
+        <div class="px-2 pt-5 my-5 text-center">
+            <h1 class="display-4 fw-bold text-body-emphasis">Talleres 2023</h1>
+            <p class="lead mb-4">¡Atención padres de familia! Este año 2023, el colegio se complace en invitarlos a inscribir a sus hijos en nuestros talleres extracurriculares que empezaran el proximo 10 de Abril. Tenemos una amplia variedad de opciones que van desde deportes hasta arte y tecnología. ¡Aprovechen esta oportunidad para que sus hijos desarrollen nuevas habilidades y talentos! Contáctenos para más información sobre los horarios y costos de los talleres..</p>
+
+        </div>
+    </div>
+
+   
+
+
+  <div class="container px-4 py-2" id="icon-grid">
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+      <div class="col d-flex align-items-start">
+        <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#bootstrap"/></svg>
+        <div>
+          <h3 class="fw-bold mb-0 fs-4 text-primary">1. Hockey patin</h3>
+          <p class="fw-bold mb-0">Profesor: Misael Troncoso.</p>
+          <a href="/resultado/taller/15" role="button" class="btn btn-warning">inscritos</a>
+          <p>Viernes de 15:00 a 16:30.</p>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#cpu-fill"/></svg>
+        <div>
+          <h3 class="fw-bold mb-0 fs-4 text-primary">2. Basquetball</h3>
+          <p class="fw-bold mb-0">Profesor: Gonzalo Sanhueza.</p>
+          <a href="/resultado/taller/14" role="button" class="btn btn-warning">inscritos</a>
+          <p>Jueves de 16:00 a 17:00.(primer ciclo)</p>
+          <p>Jueves de 17:00 a 18:00.(segundo ciclo)</p>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#speedometer2"/></svg>
+        <div>
+          <h3 class="fw-bold mb-0 fs-4 text-primary">3.Taller de Grabado</h3>
+          <p class="fw-bold mb-0">Profesor: Francisco Moya .</p>
+          <a href="/resultado/taller/6" role="button" class="btn btn-warning">inscritos</a>
+          <p>Jueves de 16:15 a 17:45.</p>
+        </div>
+      </div>
+
+      <div class="col d-flex align-items-start">
+        <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#speedometer2"/></svg>
+        <div>
+          <h3 class="fw-bold mb-0 fs-4 text-primary">3.Danza y Coreografia</h3>
+          <p class="fw-bold mb-0">Profesor: Patricia Contreras.</p>
+          <a href="/resultado/taller/16" role="button" class="btn btn-warning">inscritos</a>
+          <p>Viernes de 14:00 a 15:30 (primer ciclo)</p>
+          <p>Viernes de 15:30 a 17:00 (segundo ciclo)</p>
+        </div>
+      </div>
+      
+      <div class="col d-flex align-items-start">
+        <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#home"/></svg>
+        <div>
+          <h3 class="fw-bold mb-0 fs-4 text-primary">5.Pintura </h3>
+          <p class="fw-bold mb-0">Profesor: Francisco Moya.</p>
+          <a href="/resultado/taller/5" role="button" class="btn btn-warning">inscritos</a>
+
+          <p>Miercoles de 16:00 a 17:00 (primer ciclo)</p>
+          <p>Lunes de 16:15 a 17:45 (segundo ciclo)</p>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#speedometer2"/></svg>
+        <div>
+          <h3 class="fw-bold mb-0 fs-4 text-primary">6. Volleyball</h3>
+          <p class="fw-bold mb-0">Profesor: Gonzalo Sanhueza .</p>
+          <a href="/resultado/taller/13" role="button" class="btn btn-warning">inscritos</a>
+          <p>Miercoles de 16:00 a 17:00.(solo segundo ciclo)</p>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#toggles2"/></svg>
+        <div>
+          <h3 class="fw-bold mb-0 fs-4 text-primary">7. Aikido</h3>
+          <p class="fw-bold mb-0">Profesor: Marcelo Cespedes .</p>
+          <a href="/resultado/taller/12" role="button" class="btn btn-warning">inscritos</a>
+          <p>Miercoles de 16:00 a 17:00 (solo segundo ciclo) </p>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#geo-fill"/></svg>
+        <div>
+          <h3 class="fw-bold mb-0 fs-4 text-primary">8. Coro</h3>
+          <p class="fw-bold mb-0">Profesor:  Jaime Gonzalez.</p>
+          <a href="/resultado/taller/11" role="button" class="btn btn-warning">inscritos</a>
+          <p>Miercoles de 16:15 a 17:45</p>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#tools"/></svg>
+        <div>
+          <h3 class="fw-bold mb-0 fs-4 text-primary">9. Teatro</h3>
+
+          <p class="fw-bold mb-0">Profesor: Paola Alarcón.</p>
+<a href="/resultado/taller/9" role="button" class="btn btn-warning">inscritos</a>
+          <p>Martes de 16:15 a 17:45</p>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#tools"/></svg>
+        <div>
+          <h3 class="fw-bold mb-0 fs-4 text-primary">10. Atletismo</h3>
+          <p class="fw-bold mb-0">Profesor: Gonzalo Sanhueza.</p>
+          <a href="/resultado/taller/10" role="button" class="btn btn-warning">inscritos</a>
+          <p>Martes de 16:00 a 17:00 (solo segundo ciclo)</p>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#tools"/></svg>
+        <div>
+          <h3 class="fw-bold mb-0 fs-4 text-primary">11. Futbol</h3>
+          <p class="fw-bold mb-0">Profesor: Gonzalo Sanhueza.</p>
+          <a href="/resultado/taller/8" role="button" class="btn btn-warning">inscritos</a>
+          <p>Lunes de 16:00 a 17:00 (primer ciclo)</p>
+          <p>Lunes de 17:00 a 18:00 (segundo ciclo)</p>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#tools"/></svg>
+        <div>
+          <h3 class="fw-bold mb-0 fs-4 text-primary">12. Orquesta</h3>
+          <p class="fw-bold mb-0">Profesor: Marcelo Cespedes.</p>
+          <a href="/resultado/taller/7" role="button" class="btn btn-warning">inscritos</a>
+          <p>Lunes de 16:00 a 17:45</p>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="text-center container px-2 py-2" id="icon-grid">
+      <p class="lead mb-4">
+    Los talleres extracurriculares del colegio están abiertos para inscripciones hasta el 5 de Abril. Brinde a sus hijos la oportunidad de explorar nuevos intereses y habilidades mientras se divierten y aprenden. ¡Inscríbalos ahora y aprovechen esta experiencia única!
+      </p>
+    </div>
+
+     <div class="col-lg-6 mx-auto mb-5 bg-light shadow rounded">
+        <div class="container-fluid py-5">
+            <h1>Inscripción a talleres</h1>
+            <form class="" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <div class="form-group">
+                    <label for="inputAddress">Nombre y apellido del estudiante</label>
+                    <input name="alumno" type="text" class="form-control" id="inputAddress" >
+                </div>
+
+                <div class="form-group mt-4">
+                    <select class="form-select" name="curso" aria-label="Default select example">
+                        <option selected>Curso al que su hijo pertenece</option>
+                        <option value="Primero">Primero</option>
+                        <option value="Segundo">Segundo</option>
+                        <option value="Tercero">Tercero</option>
+                        <option value="Cuarto">Cuarto</option>
+                        <option value="Quinto">Quinto</option>
+                        <option value="Sexto">Sexto</option>
+                        <option value="Séptimo">Séptimo</option>
+                        <option value="Octavo">Octavo</option>
+                      </select>
+                </div>
+
+                <div class="form-group mt-4">
+                    <h5>Seleccione el numero del taller correspondiente (puede elegir 2 solamente)</h5>
+                    {% for taller in talleres %}
+                    <div>
+                        {% if taller.nombre != 'Futbol' %}
+                          {% if taller.nombre != 'Basquetbol' %}
+                            {% if taller.nombre != 'Pintura' %}
+                                {% if taller.nombre != 'Aikido' %}
+                                  {% if taller.nombre != 'Orquesta' %}
+                                    <input class="form-check-input" type="checkbox" name="talleres" value="{{ taller.id }}">
+                                    <h5>{{ taller.nombre }}</h5>
+                                  {% endif %}
+                                {% endif %}
+                            {% endif %}
+                          {% endif %}
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                   
+                </div>
+
+                  
+
+
+              <button type="submit" class="btn btn-primary mt-4">Guardar <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              </button>
+            </form>
+        </div>
+     
+
+    </div>
+
+</div>
+   {% else %} 
+
+   <div class="container text-center">
+    <div class="px-4 pt-5 my-5 text-center">
+        <h1 class="display-4 fw-bold text-body-emphasis">Inscripcion exitosa</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Estimado apoderado su inscripcion a los talleres se ha ingresado correctamente si desea ingresar otra solicitud haga click en el siguiente botón</p>
+            <a href="{% url 'talleres' %}" class="btn btn-info">
+              Inscripción
+            </a>          
+          </div>
+    </div>
+</div>
+
+
+   {% endif %}
+
+{% endblock %}

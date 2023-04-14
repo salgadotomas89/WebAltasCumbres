@@ -36,6 +36,10 @@ class Evento(models.Model):
     titulo = models.CharField(max_length=200)
     texto = models.CharField(max_length=600)
 
+class Boletin(models.Model):
+    fecha = models.DateTimeField(default=timezone.now)
+    archivo = models.FileField(upload_to='boletines', default="null")
+    autor = models.CharField(max_length=100, default='Tomas Salgado')
 
 class Profesor(models.Model):
     nombre = models.CharField(max_length=100)
@@ -114,6 +118,15 @@ class Tutor(models.Model):
     apellidos = models.CharField(max_length=100)
     trabajo = models.CharField(max_length=200)
 
+class Tenista(models.Model):
+    nombre = models.CharField(max_length=100)
+    curso = models.CharField(max_length=100)
+    puntaje = models.IntegerField(default=0, blank=True)
+    ganados = models.IntegerField(default=0, blank=True)
+    perdidos = models.IntegerField(default=0, blank=True)
+    ranking = models.IntegerField(default=0)
+    torneos = models.IntegerField(default=0)
+
 class Apoderado(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True)
     rut = models.CharField(max_length=100)
@@ -123,6 +136,10 @@ class Apoderado(models.Model):
     direccion = models.CharField(max_length=100)
     ocupacion = models.CharField(max_length=100)
     telefono = models.CharField(max_length=100)
+
+class Evaluacion(models.Model):
+    curso = models.CharField(max_length=100)
+    archivo = models.FileField(upload_to='evaluaciones', default="null")
 
 class Alumno(models.Model):
     apoderado = models.ForeignKey(Apoderado, on_delete=models.CASCADE, null=True, blank=True)
@@ -186,6 +203,21 @@ class Reserva(models.Model):
     dia = models.CharField(max_length=100)
     bloque = models.IntegerField(default=0)
 
+
+class Taller(models.Model):
+    nombre = models.CharField(max_length=100)
+    profesor = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nombre
+    
+
+class Inscripcion(models.Model):
+    alumno = models.CharField(max_length=100)
+    curso = models.CharField(max_length=100)
+    talleres = models.ManyToManyField(Taller)
+
+
 class Comunicado(models.Model):
     titulo = models.CharField(max_length=100)
     autor = models.CharField(max_length=100, default='Mauricio Orellana', null=True, blank=True)
@@ -195,5 +227,12 @@ class ArchivosComunicado(models.Model):
     comunicado = models.ForeignKey(Comunicado,on_delete=models.CASCADE)
     archivo = models.FileField(upload_to='comunicados',null=True,blank=True)
 
+
+class Amigo(models.Model):
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    nombreAmigo = models.CharField(max_length=100, null=True, blank=True)
+    visto = models.BooleanField(default=False, blank=True)
+    ip = models.CharField(max_length=100, null=True, blank=True)
 
 
